@@ -7,7 +7,7 @@ function numAlumno()
 
     var Testobject = Parse.Object.extend("Alumni");
 
-    for (i = 1; i < 257; i++) {
+    for (i = 1; i < 10; i++) {
         var TestObject = new Testobject();
         TestObject.set("numero", i);
 
