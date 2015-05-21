@@ -1,0 +1,227 @@
+#cuerpo{
+    position:absolute;
+    height:90%;
+    width:100%;
+
+
+}
+.drinks{
+    display:list-item;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.mesa{
+    border:solid 1px #000000;
+    float: left;
+    position: absolute;
+}
+#mesa1{
+
+
+     height:33%;
+     width:50%;
+     left:0%;
+    top:0%;
+
+ }
+#mesa2{
+
+    height:33%;
+    width:50%;
+    left:50%;
+    color:#000;
+    top:0%;
+
+}
+#mesa3{
+
+
+    height:33%;
+    width:50%;
+    left:0%;
+    top:33.5%;
+
+}
+#mesa4{
+
+    height:33%;
+    width:50%;
+    left:50%;
+    color:#000;
+    top:33.5%;
+
+}
+#mesa5{
+
+
+    height:33%;
+    width:50%;
+    left:0%;
+    top:67%;
+
+}
+#mesa6{
+
+    height:33%;
+    width:50%;
+    left:50%;
+    color:#000;
+    top:67%;
+
+}
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+
+#Container{
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+#Header{
+    margin-right: auto;
+    margin-left: auto;
+    height: 70px;
+    width: 100%;
+
+}
+
+#MainContainer{
+    margin-right: auto;
+    margin-left: auto;
+    height: 700px;
+    width: 500px;
+    border: 1px solid #ccc;
+    margin-top:1px;
+    margin-bottom:30px;
+    position: relative;
+}
+
+#Footer{
+    height: 100%;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+paper-input{
+    display:block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+
+
+}
+
+#Header h1{
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+
+
+core-header-panel {
+    height: 100%;
+    width: 100%;
+}
+
+
+core-toolbar{
+    background-color: #aa00aa;
+}
+
+#my-button{
+    display:block;
+    background:lightskyblue;
+    margin-right:100px;
+    margin-left:100px;
+    margin-top:65px;
+}
+
+span{
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.contain{
+    position:relative;
+    top:10%;
+
+
+}
+#logo{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+}
+.header{
+    color:#fff;
+    text-align: center;
+}
+.selectMenu{
+    position:absolute;
+    height: 100%;
+    top:10%;
+    left:44%;
+}
+fieldset {
+    border: 0;
+}
+label {
+    display: block;
+    margin: 30px 0 0 0;
+}
+select {
+    width: 200px;
+}
+.overflow {
+    height: 200px;
+}
+
+button {
+    margin-top: 2em;
+}
+
+#format{
+    position: absolute;
+    left: 42%;
+    top: 70%;
+}
+#radio{
+    position: absolute;
+    left: 40%;
+    top: 75%;
+}
+#checkcheck{
+    position: absolute;
+    left: 20%;
+
+}
+
+.btn.btn-success{
+    position: absolute;
+    left: 30%;
+    top: 40%;
+}
+
+.btn.btn-danger{
+    position: absolute;
+    left: 50%;
+    top:40%
+}
+
+
+
+
+
+
