@@ -86,7 +86,26 @@
                     "MATRICULA": mat
 
                 }));
-                alert(mat);
+                //alert(mat);
+                var TestObject = Parse.Object.extend("Alumni");
+                var query = new Parse.Query(TestObject);
+                query.equalTo("matricula", mat);
+                //alert(mat);
+                query.find({
+                        success: function (results) {
+                            for (var j = 0; j < results.length; j++) {
+                                var object = results[j];
+                                //alert("Successfully retrieved " + results.length + " tipos.");
+                                // Do something with the returned Parse.Object values
+
+                                alert("Ahuevo puto "+object.get("nombre"));
+                            }
+                        },
+                        error: function () {
+                            alert("ingrese una matricula valida "  );
+                        }
+                    });
+
                 //alert(mesa + " " + clave + " ");
                /* Parse.User.logIn(mesa, clave, {
                     success: function (user) {
