@@ -24,45 +24,82 @@ function numAlumno()
         });
     }
 }
-function asignTeam()
+
+
+function numAlumnoAsistentes()
 {
-    var TestObject = Parse.Object.extend("Alumni");
+    var TestObject = Parse.Object.extend("AlumnosAsistentes");
+    
+    for (i=1; i<=32; i++)
+        {
+            var objeto = new TestObject();
+            objeto.set("numero",i);
+            
+            objeto.save(null,{
+                succes: function(){
+                    
+                },
+                error: function () {
+                    alert('No se pudo crear el nuevo objeto en AlumnosAsistentes' + error.message);
+                }
+            });
+        }
+}
+
+function assignTeam()
+{
+    var TestObject = Parse.Object.extend("AlumnosAsistentes");
     var query = new Parse.Query(TestObject);
-    for(i = 1; i < 257; i++) {
-        query.EqualTo("numero", i);
+    var numSuccesses = 0;
+    for(i = 1; i < 33; i++) {
+        query.equalTo("numero", i);
         query.find({
             success: function (results) {
+                numSuccesses++;
 
                 //alert("Successfully retrieved " + results.length + " tipos.");
                 // Do something with the returned Parse.Object values
+                //Guardar nombres de equipo. 1-4:CIT, 5-8:INGE, 9-12:PIT2, 13-16:PIT3
+                var nombreEquipo;
                 for (var j = 0; j < results.length; j++) {
                     var object = results[j];
-                    var num=i%16;
+                    var num=(numSuccesses%16)+1;
                     switch (num)
                     {
                         case 0:break;
-                        case 1:break;
-                        case 2:break;
-                        case 3:break;
-                        case 4:break;
-                        case 5:break;
-                        case 6:break;
-                        case 7:break;
-                        case 8:break;
-                        case 9:break;
-                        case 10:break;
-                        case 11:break;
-                        case 12:break;
-                        case 13:break;
-                        case 14:break;
-                        case 15:break;
-
+                        case 1: nombreEquipo = "CIT-AZUL"; break;
+                        case 2: nombreEquipo = "CIT-VERDE"; break;
+                        case 3: nombreEquipo = "CIT-ROJO"; break;
+                        case 4: nombreEquipo = "CIT-AMARILLO"; break;
+                        case 5: nombreEquipo = "INGE-AZUL"; break;
+                        case 6: nombreEquipo = "INGE-VERDE"; break;
+                        case 7: nombreEquipo = "INGE-ROJO"; break;
+                        case 8: nombreEquipo = "INGE-AMARILLO"; break;
+                        case 9: nombreEquipo = "PIT2-AZUL"; break;
+                        case 10: nombreEquipo = "PIT2-VERDE"; break;
+                        case 11: nombreEquipo = "PIT2-ROJO"; break;
+                        case 12: nombreEquipo = "PIT2-AMARILLO"; break;
+                        case 13: nombreEquipo = "PIT3-AZUL"; break;
+                        case 14: nombreEquipo = "PIT3-VERDE"; break;
+                        case 15: nombreEquipo = "PIT3-ROJO"; break;
+                        case 16: nombreEquipo = "PIT3-AMARILLO"; break;
                     }
+                    object.set("equipo",nombreEquipo);
+                    object.save(null,
+                                {
+                        succes:function(){
+                            
+                        },
+                        error: function(){
+                            alert("Error al guardar el nombre de equipo" + error.message);
+                        }
+                    });
                 }
-                alert("El numero de personas es: "+personas+"\nEl pedido de la mesa1 es:\n" + pedido + "\nSu cuenta es: " + cuenta + " pesos");
+                
+                
             },
             error: function (error) {
-                alert("Error: " + error.code + " " + error.message);
+                alert("No se encontro objeto. Error: " + error.code + " " + error.message);
             }
         });
     }
