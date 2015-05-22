@@ -62,11 +62,12 @@ function assignTeam()
                 //Guardar nombres de equipo. 1-4:CIT, 5-8:INGE, 9-12:PIT2, 13-16:PIT3
                 var nombreEquipo;
                 for (var j = 0; j < results.length; j++) {
+
                     var object = results[j];
-                    var num=(numSuccesses%16)+1;
+                    var num=(object.get('numero')%16);
                     switch (num)
                     {
-                        case 0:break;
+                        case 0: nombreEquipo = "PIT3-AMARILLO"; break;
                         case 1: nombreEquipo = "CIT-AZUL"; break;
                         case 2: nombreEquipo = "CIT-VERDE"; break;
                         case 3: nombreEquipo = "CIT-ROJO"; break;
@@ -82,7 +83,7 @@ function assignTeam()
                         case 13: nombreEquipo = "PIT3-AZUL"; break;
                         case 14: nombreEquipo = "PIT3-VERDE"; break;
                         case 15: nombreEquipo = "PIT3-ROJO"; break;
-                        case 16: nombreEquipo = "PIT3-AMARILLO"; break;
+
                     }
                     object.set("equipo",nombreEquipo);
                     object.save(null,
