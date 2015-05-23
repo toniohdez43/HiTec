@@ -154,14 +154,20 @@ core-toolbar{
     background-color: #aa00aa;
 }
 
-#my-button, #my-button2{
+#my-button{
     display:block;
     background:lightskyblue;
     margin-right:100px;
     margin-left:100px;
     margin-top:65px;
 }
-
+#my-button2 {
+    display: block;
+    background: lightskyblue;
+    margin-right: 100px;
+    margin-left: 100px;
+    margin-top: 105px;
+}
 span{
     margin-left: auto;
     margin-right: auto;

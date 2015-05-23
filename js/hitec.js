@@ -76,9 +76,8 @@ function buscarMatricula ()
                         //alert("Successfully retrieved " + results.length + " tipos.");
                         // Do something with the returned Parse.Object values
 
-                        alert("Ahuevo puto " + object.get("nombre"));
                         //despliegue de datos
-                        var tablatodo = ( object.get("matricula")+ " " +object.get("nombre") + " " + object.get("paterno")+ " " + object.get("materno")+ " " +
+                        var tablatodo = ( object.get("matricula")+ "" +object.get("nombre") + " " + object.get("paterno")+ " " + object.get("materno")+ " " +
                         object.get("carrera")+ " " + object.get("correo"));
 
 
