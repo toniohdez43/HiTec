@@ -45,7 +45,93 @@ function numAlumnoAsistentes()
             });
         }
 }
+function buscarMatriula ()
+{
 
+    var mat;
+
+    Polymer('note-list', {
+        getNombre: function ()
+        {
+            mat = this.val1;
+
+            var _alumno = {
+                "MATRICULA": mat
+
+
+            };
+            localStorage.setItem('_ALUMNO', JSON.stringify({
+                "MATRICULA": mat
+
+            }));
+            //alert(mat);
+            var TestObject = Parse.Object.extend("Alumni");
+            var query = new Parse.Query(TestObject);
+            query.equalTo("matricula", mat)
+            //alert(mat);
+            query.find({
+                success: function (results) {
+                    for (var j = 0; j < results.length; j++) {
+                        var object = results[j];
+                        //alert("Successfully retrieved " + results.length + " tipos.");
+                        // Do something with the returned Parse.Object values
+
+                        alert("Ahuevo puto " + object.get("nombre"));
+                        var Test2 = Parse.Object.extend("AlumnosAsistentes");
+                        var test2 = new Test2();
+                        test2.set("nombre",object.get("nombre"));
+                        test2.save(null, {
+                            success: function (test2) {
+                                // Execute any logic that should take place after the object is saved.
+                                // alert('New object created with objectId: ' + TestObject.id);
+                            },
+                            error: function (test2, error) {
+                                // Execute any logic that should take place if the save fails.
+                                // error is a Parse.Error with an error code and message.
+                                alert('Failed to create new object, with error code: ' + error.message);
+                            }
+                        });
+                    }
+                },
+
+                error: function (error) {
+                    alert("ingrese una matricula valida " + error.code + " " + " " + error.message);
+                }
+            });
+
+            //else console.log("ingrese una matricula valida ");
+            //alert(mesa + " " + clave + " ");
+            /* Parse.User.logIn(mesa, clave, {
+             success: function (user) {
+
+
+             },
+             error: function (user, error) {
+
+             alert("Introduzca una contraseña correcta");
+             }
+             });*/
+            /*
+             var Testobject = Parse.Object.extend("correos");
+             var TestObject = new Testobject();
+             TestObject.set("Nombre", cliente+"");
+             TestObject.set("email", correo+"");
+             TestObject.save(null, {
+             success: function (TestObject) {
+             // Execute any logic that should take place after the object is saved.
+             // alert('New object created with objectId: ' + TestObject.id);
+             },
+             error: function (TestObject, error) {
+             // Execute any logic that should take place if the save fails.
+             // error is a Parse.Error with an error code and message.
+             alert('Failed to create new object, with error code: ' + error.message);
+             }
+             });*/
+
+        }
+
+    });
+}
 function assignTeam()
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
@@ -62,11 +148,12 @@ function assignTeam()
                 //Guardar nombres de equipo. 1-4:CIT, 5-8:INGE, 9-12:PIT2, 13-16:PIT3
                 var nombreEquipo;
                 for (var j = 0; j < results.length; j++) {
+
                     var object = results[j];
-                    var num=(numSuccesses%16)+1;
+                    var num=(object.get('numero')%16);
                     switch (num)
                     {
-                        case 0:break;
+                        case 0: nombreEquipo = "PIT3-AMARILLO"; break;
                         case 1: nombreEquipo = "CIT-AZUL"; break;
                         case 2: nombreEquipo = "CIT-VERDE"; break;
                         case 3: nombreEquipo = "CIT-ROJO"; break;
@@ -82,7 +169,7 @@ function assignTeam()
                         case 13: nombreEquipo = "PIT3-AZUL"; break;
                         case 14: nombreEquipo = "PIT3-VERDE"; break;
                         case 15: nombreEquipo = "PIT3-ROJO"; break;
-                        case 16: nombreEquipo = "PIT3-AMARILLO"; break;
+
                     }
                     object.set("equipo",nombreEquipo);
                     object.save(null,
