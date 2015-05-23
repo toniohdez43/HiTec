@@ -5,6 +5,14 @@
 
 
 }
+#myTable{
+    display:block;
+    padding-top: 10%;
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    color: #009688;
+}
 .drinks{
     display:list-item;
     margin-left: auto;
