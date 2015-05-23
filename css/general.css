@@ -139,7 +139,7 @@ core-toolbar{
     background-color: #aa00aa;
 }
 
-#my-button{
+#my-button, #my-button2{
     display:block;
     background:lightskyblue;
     margin-right:100px;
