@@ -45,7 +45,7 @@ function numAlumnoAsistentes()
             });
         }
 }
-function buscarMatriula ()
+function buscarMatricula ()
 {
 
     var mat;
@@ -76,21 +76,49 @@ function buscarMatriula ()
                         //alert("Successfully retrieved " + results.length + " tipos.");
                         // Do something with the returned Parse.Object values
 
-                        alert("Ahuevo puto " + object.get("nombre"));
-                        var Test2 = Parse.Object.extend("AlumnosAsistentes");
-                        var test2 = new Test2();
-                        test2.set("nombre",object.get("nombre"));
-                        test2.save(null, {
-                            success: function (test2) {
-                                // Execute any logic that should take place after the object is saved.
-                                // alert('New object created with objectId: ' + TestObject.id);
-                            },
-                            error: function (test2, error) {
-                                // Execute any logic that should take place if the save fails.
-                                // error is a Parse.Error with an error code and message.
-                                alert('Failed to create new object, with error code: ' + error.message);
-                            }
-                        });
+                        //despliegue de datos
+                        var tablatodo = ( object.get("matricula")+ "" +object.get("nombre") + " " + object.get("paterno")+ " " + object.get("materno")+ " " +
+                        object.get("carrera")+ " " + object.get("correo"));
+
+
+                        var x = document.createElement("TABLE");
+                        x.setAttribute("id", "myTable");
+                        document.getElementById("MainContainer").appendChild(x);
+
+
+
+                        var a = document.createElement("TD");
+                        var t = document.createTextNode(tablatodo);
+                        a.appendChild(t);
+                        document.getElementById("myTable").appendChild(a);
+                        //creacion del boton
+                        var l = document.createElement("paper-button");
+                        l.id="my-button2";
+                        l.setAttribute("label","Enviar");
+                        l.setAttribute("raisedbutton","");
+                        document.getElementById("MainContainer").appendChild(l);
+                        l.addEventListener('click', function(){
+                            var Test2 = Parse.Object.extend("AlumnosAsistentes");
+                            var test2 = new Test2();
+                            test2.set("nombre",object.get("nombre"));
+                            test2.save(null, {
+                                success: function (test2) {
+                                    // Execute any logic that should take place after the object is saved.
+                                    // alert('New object created with objectId: ' + TestObject.id);
+                                    alert("alumno guardado exitosamente");
+                                    l.parentNode.removeChild(l);
+                                    x.parentNode.removeChild(x);
+                                    $("#input").val('');
+
+                                },
+                                error: function (test2, error) {
+                                    // Execute any logic that should take place if the save fails.
+                                    // error is a Parse.Error with an error code and message.
+                                    alert('Failed to create new object, with error code: ' + error.message);
+                                }
+                            });
+                        },false);
+
                     }
                 },
 
@@ -132,6 +160,7 @@ function buscarMatriula ()
 
     });
 }
+
 function assignTeam()
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
