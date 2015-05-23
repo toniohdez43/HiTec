@@ -77,6 +77,22 @@ function buscarMatricula ()
                         // Do something with the returned Parse.Object values
 
                         alert("Ahuevo puto " + object.get("nombre"));
+                        //despliegue de datos
+                        var tablatodo = ( object.get("matricula")+ " " +object.get("nombre") + " " + object.get("paterno")+ " " + object.get("materno")+ " " +
+                        object.get("carrera")+ " " + object.get("correo"));
+
+
+                        var x = document.createElement("TABLE");
+                        x.setAttribute("id", "myTable");
+                        document.getElementById("MainContainer").appendChild(x);
+
+
+
+                        var a = document.createElement("TD");
+                        var t = document.createTextNode(tablatodo);
+                        a.appendChild(t);
+                        document.getElementById("myTable").appendChild(a);
+                        //creacion del boton
                         var l = document.createElement("paper-button");
                         l.id="my-button2";
                         l.setAttribute("label","Enviar");
@@ -92,7 +108,7 @@ function buscarMatricula ()
                                     // alert('New object created with objectId: ' + TestObject.id);
                                     alert("alumno guardado exitosamente");
                                     l.parentNode.removeChild(l);
-                                   
+                                    x.parentNode.removeChild(x);
                                     $("#input").val('');
 
                                 },
@@ -145,6 +161,7 @@ function buscarMatricula ()
 
     });
 }
+
 function assignTeam()
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
