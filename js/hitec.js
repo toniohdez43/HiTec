@@ -84,13 +84,12 @@ function buscarMatricula ()
                         var x = document.createElement("TABLE");
                         x.setAttribute("id", "myTable");
                         document.getElementById("MainContainer").appendChild(x);
-
-
-
                         var a = document.createElement("TD");
                         var t = document.createTextNode(tablatodo);
                         a.appendChild(t);
                         document.getElementById("myTable").appendChild(a);
+                        contadortabla();
+
                         //creacion del boton
                         var l = document.createElement("paper-button");
                         l.id="my-button2";
@@ -160,7 +159,27 @@ function buscarMatricula ()
 
     });
 }
+function contadortabla(){
 
+
+    var Contador = Parse.Object.extend("Contador");
+    var Counter = new Contador();
+    var query = new Parse.Query(Counter);
+      for(i = 1; i < 250; i++) {
+        query.equalTo("NAlumnos", 1);
+        query.find({
+            success: function (results) {
+                var object = results[i];
+                alarm(object.get("NAlumnos"));
+
+            },
+            error: function (error) {
+                alert("No se encontro objeto. Error: " + error.code + " " + error.message);
+            }
+
+        });
+    }
+}
 function assignTeam()
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
