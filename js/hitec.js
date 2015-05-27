@@ -54,6 +54,7 @@ function buscarMatricula ()
         getNombre: function ()
         {
             mat = this.val1;
+            this.val1="";
 
             var _alumno = {
                 "MATRICULA": mat
@@ -88,7 +89,7 @@ function buscarMatricula ()
                         var t = document.createTextNode(tablatodo);
                         a.appendChild(t);
                         document.getElementById("myTable").appendChild(a);
-                        contadortabla();
+                        //contadortabla();
 
                         //creacion del boton
                         var l = document.createElement("paper-button");
@@ -170,7 +171,7 @@ function contadortabla(){
         query.find({
             success: function (results) {
                 var object = results[i];
-                alarm(object.get("NAlumnos"));
+                alert(object.get("NAlumnos"));
 
             },
             error: function (error) {
