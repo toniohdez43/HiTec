@@ -73,14 +73,22 @@ function buscarMatricula ()
             query.find({
                 success: function (results) {
                     for (var j = 0; j < results.length; j++) {
-                        var object = results[j];
+                        var object1 = results[j];
                         //alert("Successfully retrieved " + results.length + " tipos.");
                         // Do something with the returned Parse.Object values
 
                         //despliegue de datos
-                        var tablatodo = ( object.get("matricula")+ "" +object.get("nombre") + " " + object.get("paterno")+ " " + object.get("materno")+ " " +
-                        object.get("carrera")+ " " + object.get("correo"));
+                        var tablatodo = ( object1.get("matricula")+ "" +object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno")+ " " +
+                        object1.get("carrera")+ " " + object1.get("correo"));
+                        object1.set("asistio", true);
+                        object1.save(null,{
+                            succes: function(){
 
+                            },
+                            error: function () {
+                                alert('No se pudo crear el nuevo objeto en AlumnosAsistentes' + error.message);
+                            }
+                        });
 
                         var x = document.createElement("TABLE");
                         x.setAttribute("id", "myTable");
@@ -98,25 +106,68 @@ function buscarMatricula ()
                         l.setAttribute("raisedbutton","");
                         document.getElementById("MainContainer").appendChild(l);
                         l.addEventListener('click', function(){
-                            var Test2 = Parse.Object.extend("AlumnosAsistentes");
-                            var test2 = new Test2();
-                            test2.set("nombre",object.get("nombre"));
-                            test2.save(null, {
-                                success: function (test2) {
-                                    // Execute any logic that should take place after the object is saved.
-                                    // alert('New object created with objectId: ' + TestObject.id);
-                                    alert("alumno guardado exitosamente");
-                                    l.parentNode.removeChild(l);
-                                    x.parentNode.removeChild(x);
-                                    $("#input").val('');
+
+                            var Contador = Parse.Object.extend("Alumni");
+                            //var Counter = new Contador();
+                            var query = new Parse.Query(Contador);
+
+                            query.equalTo("asistio", true);
+                            query.count({
+                                success: function(count) {
+                                    // The count request succeeded. Show the count
+                                    alert("Asistieron " + count + " alumnos");
+                                    var Test2 = Parse.Object.extend("AlumnosAsistentes");
+                                    var query2 = new Parse.Query(Test2);
+                                    var test2 = new Test2();
+                                    query2.equalTo("numero", count);
+                                    query2.find({
+                                        success: function(results)
+                                        {
+                                            for (var i = 0; i < results.length; i++) {
+                                                var object = results[i];
+                                                alert(object.get("numero")+" "+object1.get("nombre"));
+                                                object.set("nombre",object1.get("nombre"));
+                                                object.set("paterno",object1.get("paterno"));
+                                                object.set("materno",object1.get("materno"));
+                                                object.set("correo",object1.get("correo"));
+                                                object.set("carrera",object1.get("carrera"));
+                                                object.set("matricula",object1.get("matricula"));
+                                                object.set("asistio",object1.get("asistio"));
+                                                object.save(null, {
+                                                    success: function (test2) {
+                                                        // Execute any logic that should take place after the object is saved.
+                                                        // alert('New object created with objectId: ' + TestObject.id);
+                                                        alert("alumno guardado exitosamente");
+                                                        alert("Su equipo es : "+object.get("equipo"));
+
+                                                        l.parentNode.removeChild(l);
+                                                        x.parentNode.removeChild(x);
+                                                        $("#input").val('');
+
+                                                    },
+                                                    error: function (test2, error) {
+                                                        // Execute any logic that should take place if the save fails.
+                                                        // error is a Parse.Error with an error code and message.
+                                                        alert('Failed to create new object, with error code: ' + error.message);
+                                                    }
+                                                });
+                                            }
+
+                                        },
+
+                                        error: function (error) {
+                                            alert("ingrese una matricula valida " + error.code + " " + " " + error.message);
+                                        }
+
+
+                                    });
 
                                 },
-                                error: function (test2, error) {
-                                    // Execute any logic that should take place if the save fails.
-                                    // error is a Parse.Error with an error code and message.
-                                    alert('Failed to create new object, with error code: ' + error.message);
+                                error: function(error) {
+                                    // The request failed
                                 }
                             });
+
                         },false);
 
                     }
@@ -160,27 +211,63 @@ function buscarMatricula ()
 
     });
 }
+/*
 function contadortabla(){
 
 
-    var Contador = Parse.Object.extend("Contador");
-    var Counter = new Contador();
-    var query = new Parse.Query(Counter);
-      for(i = 1; i < 250; i++) {
-        query.equalTo("NAlumnos", 1);
-        query.find({
-            success: function (results) {
-                var object = results[i];
-                alert(object.get("NAlumnos"));
+    var Contador = Parse.Object.extend("Alumni");
+    //var Counter = new Contador();
+    var query = new Parse.Query(Contador);
 
-            },
-            error: function (error) {
-                alert("No se encontro objeto. Error: " + error.code + " " + error.message);
+    query.equalTo("asistio", true);
+    query.count({
+        success: function(count) {
+            // The count request succeeded. Show the count
+            alert("Asistieron " + count + " alumnos");
+            var Test2 = Parse.Object.extend("AlumnosAsistentes");
+            var query2 = new Parse.Query(Test2);
+            var test2 = new Test2();
+            query2.equalTo("numero", count);
+            query2.find({
+                success: function()
+                {
+                    for (var j = 0; j < results.length; j++) {
+                        var object = results[j];
+                    }
+
+                },
+
+                error: function (error) {
+                alert("ingrese una matricula valida " + error.code + " " + " " + error.message);
             }
 
-        });
-    }
-}
+
+            });
+            test2.set("nombre",object1.get("nombre"));
+            test2.save(null, {
+                success: function (test2) {
+                    // Execute any logic that should take place after the object is saved.
+                    // alert('New object created with objectId: ' + TestObject.id);
+                    alert("alumno guardado exitosamente");
+                    l.parentNode.removeChild(l);
+                    x.parentNode.removeChild(x);
+                    $("#input").val('');
+
+                },
+                error: function (test2, error) {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Parse.Error with an error code and message.
+                    alert('Failed to create new object, with error code: ' + error.message);
+                }
+            });
+        },
+        error: function(error) {
+            // The request failed
+        }
+    });
+
+
+}*/
 function assignTeam()
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
