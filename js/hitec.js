@@ -2,6 +2,11 @@
  * Created by Gabriel Hdez on 5/20/2015.
  */
 Parse.initialize("4J8YjMmfjGfPpSJfbWhVVkdROiI7Dvjrzh6dYuCs", "pPVE48ASc2fJO9GlPBJo27NOADR2vaxwUqFv8Lq1");
+var repetido = 0;
+function valRep()
+{
+    return repetido=1;
+}
 function numAlumno()
 {
 
@@ -111,16 +116,49 @@ function buscarMatricula ()
                             //var Counter = new Contador();
                             var query = new Parse.Query(Contador);
 
-                            query.equalTo("asistio", true);
+                            query.equalTo("asistio", true);//le ponemos asistencia al alumno
                             query.count({
+                                //cuenta los alumnos que han asistido
                                 success: function(count) {
                                     // The count request succeeded. Show the count
                                     alert("Asistieron " + count + " alumnos");
                                     var Test2 = Parse.Object.extend("AlumnosAsistentes");
                                     var query2 = new Parse.Query(Test2);
                                     var test2 = new Test2();
-                                    query2.equalTo("numero", count);
+                                    
+                                    //Hacemos un query que busque el numero que sea igual a la cuenta. 
+                                    //De esta manera podemos insertar los datos del alumno en el espacio libre siguiente
+                                    query2.equalTo("matricula", mat);
                                     query2.find({
+                                        success: function(results) {
+                                       
+                                        for (var i = 0; i < results.length; ++i) {
+                                        valRep();
+                                        alert("Entramos "+repetido);
+                                        
+                                        }
+      
+                                        },
+                                        error: function() {
+                                        response.error("movie lookup failed");
+                                        }
+                                    });
+                                    alert(repetido);
+                                    if(repetido==1)
+                                    { 
+                                        alert("Alumno previamente ingresado. Favor de proporcionar matricula valida " + repetido);
+                                        l.parentNode.removeChild(l);
+                                        x.parentNode.removeChild(x);
+                                        
+                                        $("#input").val('');
+                                    }
+                                    
+                                    if(repetido!=1){
+                                    alert("se armo puto");
+                                    var Test3 = Parse.Object.extend("AlumnosAsistentes");
+                                    var query3 = new Parse.Query(Test3);
+                                    query3.equalTo("numero", count);
+                                    query3.find({
                                         success: function(results)
                                         {
                                             for (var i = 0; i < results.length; i++) {
@@ -142,6 +180,7 @@ function buscarMatricula ()
 
                                                         l.parentNode.removeChild(l);
                                                         x.parentNode.removeChild(x);
+                                                       
                                                         $("#input").val('');
 
                                                     },
@@ -160,7 +199,8 @@ function buscarMatricula ()
                                         }
 
 
-                                    });
+                                    });}
+                                    repetido=0;
 
                                 },
                                 error: function(error) {
