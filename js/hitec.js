@@ -73,7 +73,7 @@ function buscarMatricula ()
             //alert(mat);
             var TestObject = Parse.Object.extend("Alumni");
             var query = new Parse.Query(TestObject);
-            query.equalTo("matricula", mat)
+            query.equalTo("matricula", mat);
             //alert(mat);
             query.find({
                 success: function (results) {
@@ -83,8 +83,22 @@ function buscarMatricula ()
                         // Do something with the returned Parse.Object values
 
                         //despliegue de datos
-                        var tablatodo = ( object1.get("matricula")+ "" +object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno")+ " " +
-                        object1.get("carrera")+ " " + object1.get("correo"));
+                        var args = [];
+                        args[0] = "Matricula: " + object1.get("matricula");
+                        args[1] = "Alumno: " + object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno");
+                        args[2] = "Carrera: " + object1.get("carrera");
+                        args[3] = "Correo: " + object1.get("correo");
+                        args[4] = "Equipo: " + object1.get("equipo");
+                        
+                        /*
+                        var tablatodo = "Matricula: " + object1.get("matricula");
+                        tablatodo += " \n";
+                        tablatodo += "\n Alumno: " + object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno");
+                        tablatodo += "\nCarrera: " + object1.get("carrera");
+                        tablatodo += "\nCorreo: " + object1.get("correo");
+                        tablatodo += "\nEquipo: " + object1.get("equipo");
+                        */
+                        
                         object1.set("asistio", true);
                         object1.save(null,{
                             succes: function(){
@@ -99,8 +113,12 @@ function buscarMatricula ()
                         x.setAttribute("id", "myTable");
                         document.getElementById("MainContainer").appendChild(x);
                         var a = document.createElement("TD");
-                        var t = document.createTextNode(tablatodo);
-                        a.appendChild(t);
+                        for(i=0;i<args.length;i++)
+                            {
+                                var t = document.createTextNode(args[i]);
+                                a.appendChild(t);
+                                a.appendChild(document.createElement("br"));
+                            }
                         document.getElementById("myTable").appendChild(a);
                         //contadortabla();
 
@@ -109,6 +127,7 @@ function buscarMatricula ()
                         l.id="my-button2";
                         l.setAttribute("label","Enviar");
                         l.setAttribute("raisedbutton","");
+                        l.style.marginTop = "180px";
                         document.getElementById("MainContainer").appendChild(l);
                         l.addEventListener('click', function(){
 
