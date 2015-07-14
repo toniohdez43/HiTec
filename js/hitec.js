@@ -83,21 +83,12 @@ function buscarMatricula ()
                         // Do something with the returned Parse.Object values
 
                         //despliegue de datos
-                        var args = [];
-                        args[0] = "Matricula: " + object1.get("matricula");
-                        args[1] = "Alumno: " + object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno");
-                        args[2] = "Carrera: " + object1.get("carrera");
-                        args[3] = "Correo: " + object1.get("correo");
-                        args[4] = "Equipo: " + object1.get("equipo");
-                        
-                        /*
-                        var tablatodo = "Matricula: " + object1.get("matricula");
-                        tablatodo += " \n";
-                        tablatodo += "\n Alumno: " + object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno");
-                        tablatodo += "\nCarrera: " + object1.get("carrera");
-                        tablatodo += "\nCorreo: " + object1.get("correo");
-                        tablatodo += "\nEquipo: " + object1.get("equipo");
-                        */
+                        var tablatodo = [];
+                        tablatodo[0] = "Matricula: " + object1.get("matricula");
+                        tablatodo[1] = "Alumno: " + object1.get("nombre") + " " + object1.get("paterno")+ " " + object1.get("materno");
+                        tablatodo[2] = "Carrera: " + object1.get("carrera");
+                        tablatodo[3] = "Correo: " + object1.get("correo");
+                        tablatodo[4] = "Equipo: " + object1.get("equipo");
                         
                         object1.set("asistio", true);
                         object1.save(null,{
@@ -112,10 +103,11 @@ function buscarMatricula ()
                         var x = document.createElement("TABLE");
                         x.setAttribute("id", "myTable");
                         document.getElementById("MainContainer").appendChild(x);
+                        document.getElementById("myTable").innerHTML = "";
                         var a = document.createElement("TD");
-                        for(i=0;i<args.length;i++)
+                        for(i=0;i<tablatodo.length;i++)
                             {
-                                var t = document.createTextNode(args[i]);
+                                var t = document.createTextNode(tablatodo[i]);
                                 a.appendChild(t);
                                 a.appendChild(document.createElement("br"));
                             }
@@ -123,12 +115,17 @@ function buscarMatricula ()
                         //contadortabla();
 
                         //creacion del boton
+                        
+                        var z = document.createElement("div");
+                        z.setAttribute("id","buttonContainer");
+                        document.getElementById("MainContainer").appendChild(z);
+                        document.getElementById("buttonContainer").innerHTML = "";
                         var l = document.createElement("paper-button");
                         l.id="my-button2";
                         l.setAttribute("label","Enviar");
                         l.setAttribute("raisedbutton","");
                         l.style.marginTop = "180px";
-                        document.getElementById("MainContainer").appendChild(l);
+                        document.getElementById("buttonContainer").appendChild(l);
                         l.addEventListener('click', function(){
 
                             var Contador = Parse.Object.extend("Alumni");
