@@ -100,9 +100,12 @@ function buscarMatricula ()
                             }
                         });
 
+                        var data = document.createElement("div");
+                        data.style.display = "block";
                         var x = document.createElement("TABLE");
                         x.setAttribute("id", "myTable");
-                        document.getElementById("MainContainer").appendChild(x);
+                        data.appendChild(x);
+                        document.getElementById("MainContainer").appendChild(data);
                         document.getElementById("myTable").innerHTML = "";
                         var a = document.createElement("TD");
                         for(i=0;i<tablatodo.length;i++)
@@ -116,16 +119,24 @@ function buscarMatricula ()
 
                         //creacion del boton
                         
-                        var z = document.createElement("div");
-                        z.setAttribute("id","buttonContainer");
-                        document.getElementById("MainContainer").appendChild(z);
+                        
+                        var container = document.createElement("span");
+                        container.setAttribute("id","buttonContainer");
+                        data.appendChild(container);
                         document.getElementById("buttonContainer").innerHTML = "";
                         var l = document.createElement("paper-button");
-                        l.id="my-button2";
+                        var btnCancel = document.createElement("paper-button");
+                        btnCancel.id = "my-button3";
+                        btnCancel.setAttribute("label","Cancel");
+                        btnCancel.setAttribute("raisedbutton","");
+                        l.id="my-button3";
                         l.setAttribute("label","Enviar");
                         l.setAttribute("raisedbutton","");
-                        l.style.marginTop = "180px";
-                        document.getElementById("buttonContainer").appendChild(l);
+                        container.appendChild(l);
+                        container.appendChild(btnCancel);
+                        btnCancel.addEventListener('click', function(){
+                            data.innerHTML ="";
+                        });
                         l.addEventListener('click', function(){
 
                             var Contador = Parse.Object.extend("Alumni");

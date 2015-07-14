@@ -162,12 +162,25 @@ core-toolbar{
     margin-top:65px;
 }
 #my-button2 {
+    margin-left: 5%;
+    width: 40%;
     display: block;
     background: lightskyblue;
-    margin-right: 100px;
-    margin-left: 100px;
-    margin-top: 105px;
+    margin-top: 65px;
 }
+
+#my-button3{
+    background: lightskyblue;
+    width: 40%;
+    margin-left: 5%;
+    margin-top: 180px;
+}
+#button-cancel{
+    display: inline-block;
+    margin: 1000px;
+}
+
+
 span{
     margin-left: auto;
     margin-right: auto;
