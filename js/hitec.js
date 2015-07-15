@@ -238,7 +238,7 @@ function save(local){
                         nombre += " " + objectAlumni.get("paterno");
                         infoDiv.appendChild(document.createTextNode(nombre));
                         infoDiv.appendChild(document.createElement("br"));
-                        infoDiv.appendChild(document.createTextNode("Equipo: " + objectAlumni.get("equipo")));
+                        infoDiv.appendChild(document.createTextNode("Equipo: " + objectAsistentes.get("equipo")));
                         var btnCancel = document.createElement("paper-button");
                         btnCancel.id = "my-button4";
                         btnCancel.setAttribute("label","OK");
@@ -408,18 +408,21 @@ function assignTeam()
 */
 
 //Metodo llenarAlumni: llena la tabla Alumni con el numero de alumnos que se le indiquen
-/*
-function llenarAlumni(var numero)
+
+function llenarAlumni(numero)
 {
 
-    var Testobject = Parse.Object.extend("Alumni");
+    var TestObject = Parse.Object.extend("Alumni");
 
-    for (i = 1; i < numero; i++) {
-        var TestObject = new Testobject();
-        TestObject.set("numero", i);
+    for (i = 1; i <= numero; i++) {
+        var object = new TestObject();
+        object.set("numero", i);
+        object.set("asistio",false);
+        object.set("matricula",i.toString());
+        object.set("nombre", "Persona "+ i.toString());
 
-        TestObject.save(null, {
-            success: function (TestObject) {
+        object.save(null, {
+            success: function (object) {
                 // Execute any logic that should take place after the object is saved.
                 // alert('New object created with objectId: ' + TestObject.id);
             },
@@ -431,7 +434,7 @@ function llenarAlumni(var numero)
         });
     }
 }
-*/
+
 
 //Metodo llenarAlumnosAsistentes: llena la tabla AlumnosAsistentes con el numero de alumnos que se le indiquen
 /*
