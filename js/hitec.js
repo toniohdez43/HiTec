@@ -419,7 +419,12 @@ function llenarAlumni(numero)
         object.set("numero", i);
         object.set("asistio",false);
         object.set("matricula",i.toString());
+        object.set("paterno","Apellido Persona " + i.toString());
+        object.set("materno", "Apellido materno");
         object.set("nombre", "Persona "+ i.toString());
+        object.set("carrera","ITIC");
+        object.set("correo","correo@correo.com")
+        object.set("equipo","");
 
         object.save(null, {
             success: function (object) {
@@ -438,7 +443,7 @@ function llenarAlumni(numero)
 
 //Metodo llenarAlumnosAsistentes: llena la tabla AlumnosAsistentes con el numero de alumnos que se le indiquen
 /*
-function llenarAlumnosAsistentes(var numero)
+function llenarAlumnosAsistentes(numero)
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
     

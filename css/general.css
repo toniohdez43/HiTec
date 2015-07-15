@@ -154,6 +154,14 @@ core-toolbar{
     background-color: #aa00aa;
 }
 
+#puntuaciones{
+    text-align: center;
+}
+
+#puntuaciones a:hover{
+    color:lightskyblue;
+}
+
 #my-button{
     font-size: 20px;
     display:block;
