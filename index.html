@@ -47,7 +47,7 @@
 
             <div id="MainContainer">
 
-                <div class="contain">
+                <div class="contain" id="contain">
 
                     <img id="logo" src="images/tec.jpg">
                     <paper-input id="matri" floatingLabel   label="Matricula" inputValue="{{val1}}"></paper-input>
@@ -55,7 +55,7 @@
                 </div>
 
                 <paper-shadow z="5"></paper-shadow>
-                <div on-click = "{{getNombre}}"><paper-button id="my-button" label="Verificar" raisedButton></paper-button></div>
+                <div on-click = "{{getNombre}}" id = "buttonDiv"><paper-button id="my-button" label="Verificar" raisedButton></paper-button></div>
 
             </div>
 

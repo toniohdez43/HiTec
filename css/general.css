@@ -175,11 +175,23 @@ core-toolbar{
     margin-left: 5%;
     margin-top: 180px;
 }
+
+#my-button4{
+    background: lightskyblue;
+    width: 40%;
+}
+
 #button-cancel{
-    display: inline-block;
+    display: block;
     margin: 1000px;
 }
 
+#infoDiv{
+    margin-top: 5%;
+    margin-left: 20%;
+    font-size: 20px;
+    display: block;
+}
 
 span{
     margin-left: auto;

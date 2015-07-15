@@ -5,12 +5,13 @@ Parse.initialize("4J8YjMmfjGfPpSJfbWhVVkdROiI7Dvjrzh6dYuCs", "pPVE48ASc2fJO9GlPB
 var repetido = 0;
 var objectAlumni;
 var resultsContainer;
+var removedChild;
+var infoDiv;
 
 function valRep()
 {
     return repetido=1;
 }
-
 
 function main ()
 {
@@ -36,13 +37,28 @@ function main ()
             var queryAlumni = new Parse.Query(TestObject);
             queryAlumni.equalTo("matricula", mat);
             //alert(mat);
+            //si no hay resultados vaciar el area
+            queryAlumni.count({
+                success: function(number){
+                    if(number==0){
+                        limpiar();
+                        alert("La matricula que has ingresado no se encuentra en la base de datos");
+                    }
+                    else{
+                        removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
+                        document.getElementById("matri").style.opacity = "0";
+                    }
+                },
+                error: function(error){
+                    alert("Error: " + error.message);
+                }
+            });
             queryAlumni.find({
                 success: function (results) {
                     for (var j = 0; j < results.length; j++) {
                         objectAlumni = results[j];
                         //alert("Successfully retrieved " + results.length + " tipos.");
                         // Do something with the returned Parse.Object values
-
                         desplegarDatos();
                     }
                 },
@@ -93,6 +109,7 @@ function desplegarDatos(){
     
     //Crear los botones de Enviar y de cancelar, asi como el span que los contendra
     var buttonContainer = document.createElement("span");
+    buttonContainer.innerHTML = "";
     buttonContainer.setAttribute("id","buttonContainer");
     resultsContainer.appendChild(buttonContainer);
     document.getElementById("buttonContainer").innerHTML = "";
@@ -104,12 +121,18 @@ function desplegarDatos(){
     btnEnviar.id="my-button3";
     btnEnviar.setAttribute("label","Enviar");
     btnEnviar.setAttribute("raisedbutton","");
-    buttonContainer.appendChild(btnEnviar);
-    buttonContainer.appendChild(btnCancel);
+    if(objectAlumni.get("asistio")!=true){
+        buttonContainer.appendChild(btnEnviar);
+        buttonContainer.appendChild(btnCancel);
+    }
+    if(objectAlumni.get("asistio")==true){
+        btnCancel.style.marginLeft = "33%";
+        buttonContainer.appendChild(btnCancel);        
+    }
     
     //Accion que ocurrira al presionar el boton cancel
     btnCancel.addEventListener('click', function(){
-        resultsContainer.innerHTML ="";
+        limpiar();
         });
     
     //Accion que ocurrira al presionar el boton Enviar
@@ -186,15 +209,35 @@ function save(local){
                 objectAsistentes.set("asistio",true);
                 objectAsistentes.save(null, {
                     success: function (objectAsistentes) {
-                        alert("Alumno guardado exitosamente");
+                        
+                        //removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
+                        document.getElementById("matri").style.opacity = "0";
+                        infoDiv = document.createElement("div");
+                        infoDiv.id = "infoDiv"
+                        infoDiv.appendChild(document.createTextNode("Alumno guardado exitosamente"));
+                        infoDiv.appendChild(document.createElement("br"));
+                        var nombre = objectAlumni.get("nombre");
+                        nombre += " " + objectAlumni.get("paterno");
+                        infoDiv.appendChild(document.createTextNode(nombre));
+                        infoDiv.appendChild(document.createElement("br"));
+                        infoDiv.appendChild(document.createTextNode("Equipo: " + objectAlumni.get("equipo")));
+                        var btnCancel = document.createElement("paper-button");
+                        btnCancel.id = "my-button4";
+                        btnCancel.setAttribute("label","OK");
+                        btnCancel.setAttribute("raisedbutton","");
+                        btnCancel.addEventListener('click',function (){
+                            limpiar();
+                        });
+                        infoDiv.appendChild(btnCancel);
+                        resultsContainer.innerHTML = "";
+                        document.getElementById("MainContainer").appendChild(infoDiv);
 
                         //Poner al alumno como asistente en la tabla Alumni, asi como guardar el equipo que le corresponde
                         objectAlumni.set("asistio",true);
                         objectAlumni.set("equipo", objectAsistentes.get("equipo"));
                         objectAlumni.save(null, {
                             success:function(){
-                                limpiar();
-                                alert("Su equipo es : "+objectAlumni.get("equipo"));
+                                
                             },
                             error:function(error){
                                 alert("Error: " + error.message);
@@ -215,6 +258,9 @@ function save(local){
 
 function limpiar(){
     resultsContainer.innerHTML = "";
+    infoDiv.innerHTML="";
+    document.getElementById("matri").style.opacity = "1";
+    document.getElementById("MainContainer").appendChild(removedChild);
 }
 
 
