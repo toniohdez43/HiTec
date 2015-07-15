@@ -7,6 +7,9 @@ var objectAlumni;
 var resultsContainer;
 var removedChild;
 var infoDiv;
+infoDiv = document.createElement("div");
+var resultsContainer;
+resultsContainer = document.createElement("div");
 
 function valRep()
 {
@@ -36,17 +39,32 @@ function main ()
             var TestObject = Parse.Object.extend("Alumni");
             var queryAlumni = new Parse.Query(TestObject);
             queryAlumni.equalTo("matricula", mat);
+            removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
+            document.getElementById("matri").style.opacity = "0";
             //alert(mat);
             //si no hay resultados vaciar el area
             queryAlumni.count({
                 success: function(number){
                     if(number==0){
                         limpiar();
-                        alert("La matricula que has ingresado no se encuentra en la base de datos");
-                    }
-                    else{
                         removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
                         document.getElementById("matri").style.opacity = "0";
+                        infoDiv = document.createElement("div");
+                        infoDiv.id = "infoDiv"
+                        infoDiv.appendChild(document.createTextNode("No se encontro la matricula " + mat));
+                        var btnCancel = document.createElement("paper-button");
+                        btnCancel.id = "my-button4";
+                        btnCancel.setAttribute("label","OK");
+                        btnCancel.setAttribute("raisedbutton","");
+                        btnCancel.addEventListener('click',function (){
+                            limpiar();
+                        });
+                        infoDiv.appendChild(btnCancel);
+                        resultsContainer.innerHTML = "";
+                        document.getElementById("MainContainer").appendChild(infoDiv);
+                    }
+                    else{
+                        
                     }
                 },
                 error: function(error){
@@ -88,12 +106,13 @@ function desplegarDatos(){
     
     
     //Crear el div en donde ira la tabla con los detalles del alumno, asi como los botones para registrar al alumno o cancelar
-    resultsContainer = document.createElement("div");
     resultsContainer.style.display = "block";
     
     //Crear la tabla en donde estaran los detalles del alumno
     var table = document.createElement("TABLE");
     table.setAttribute("id", "myTable");
+    table.style.fontSize = "20px";
+    table.style.color = "black";
     resultsContainer.appendChild(table);
     document.getElementById("MainContainer").appendChild(resultsContainer);
     document.getElementById("myTable").innerHTML = "";
@@ -210,7 +229,6 @@ function save(local){
                 objectAsistentes.save(null, {
                     success: function (objectAsistentes) {
                         
-                        //removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
                         document.getElementById("matri").style.opacity = "0";
                         infoDiv = document.createElement("div");
                         infoDiv.id = "infoDiv"
@@ -261,6 +279,7 @@ function limpiar(){
     infoDiv.innerHTML="";
     document.getElementById("matri").style.opacity = "1";
     document.getElementById("MainContainer").appendChild(removedChild);
+    //alert("entro");
 }
 
 
