@@ -1,4 +1,35 @@
-<p>Hello world</p>
-<script src="js/puntuaciones.js"></script>
-<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
-<div id="MainContainer"></div>
+    <!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="Chart.js/Chart.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/general.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    
+    <script src="js/puntuaciones.js"></script>
+    
+    <title>Scores estaciones</title>
+    
+</head>
+
+<body>
+    <div id= "chartDiv" width="100%">
+        <canvas id= "myChart"></canvas>
+    </div>
+    <div id="prueba" style="margin-top: 30%">
+    </div>
+    
+    <script>
+        init();
+    </script>
+    <script>
+        drawGraph();
+        mostrarDatos();
+    </script>
+    
+</body>
+    
+</html>
