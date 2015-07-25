@@ -16,18 +16,29 @@
 </head>
 
 <body>
-    <div id= "chartDiv" width="100%">
+    <div id= "chartDiv">
         <canvas id= "myChart"></canvas>
     </div>
-    <div id="prueba" style="margin-top: 30%">
+    <div id="container">
+        <div class="roundedCorners" id="resultsDiv1">
+            <p id="puntuaciones1" class="puntuaciones1"></p>
+            <div class = "resContainer">
+                <div id="res1_1" class="res1"></div>
+                <div id= "res1_2" class="res2"></div>
+            </div>
+        </div>
+        <div class="roundedCorners" id="resultsDiv2">
+            <p id="puntuaciones2" class="puntuaciones1"></p>
+            <div class = "resContainer">
+                <div id="res2_1"></div>
+            </div>
+        </div>
     </div>
     
+    
     <script>
-        init();
-    </script>
-    <script>
-        drawGraph();
-        mostrarDatos();
+        drawDummyGraph();
+        main();
     </script>
     
 </body>
