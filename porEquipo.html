@@ -1,0 +1,83 @@
+    <!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="Chart.js/Chart.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/general.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    
+    <script src="js/puntuaciones.js"></script>
+    <script src="js/validacion.js"></script>
+    
+    <title>Scores estaciones</title>
+    
+</head>
+
+<body>
+<div id="wrap">
+    <!-- Here's all it takes to make this navigation bar. -->
+    <ul id="nav">
+        <li><img src="images/tec2.png"></li>
+        <li><h1>HiTec 2015</h1></li>
+        <li><a name="1" href="#">Scores por color</a></li>
+        <li><a name="2" href="#">Registro</a></li>
+        <li><a name="3" href="#">Android App</a></li>
+    </ul>
+</div>
+<div id="loaderContainer">
+    <div class="loader2">Loading...</div>
+    <div class="loader1">
+        <div class="loader1-overlay hidden"></div>
+        <div id="loader1-logo">
+            <svg version="1.1" id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="150px" height="150px" viewBox="-35 -55 150 200">
+
+                <path class="loader1-logoBackground" fill="#CC6060" d="M34.7,70.9c-13.1,0-24.5-7-30.8-17.4C11.6,79.9,34.7,117,34.7,117s23.1-37.2,30.8-63.5
+                    C59.3,63.9,47.8,70.9,34.7,70.9z"/>
+
+                <g class="loader1-logoDonut">
+                    <path fill="#CC6060" d="M41.6,18.8c4.2,1.8,7.6,5.1,9.3,9.3L66.8,26c-3.1-11.1-11.9-19.9-23-23L41.6,18.8z"/>
+                    <path fill="#CC6060" d="M50.9,41.8c-1.8,4.2-5.2,7.6-9.4,9.4L43.7,67C54.8,63.9,63.6,55.1,66.8,44L50.9,41.8z"/>
+                    <g>
+                        <path fill="#CC6060" d="M18.5,28.2c1.8-4.2,5.1-7.6,9.3-9.4L25.7,3C14.6,6.1,5.8,14.9,2.7,26L18.5,28.2z"/>
+                        <path fill="#CC6060" d="M18.5,41.8L2.7,44c3.1,11.1,11.9,19.9,23.1,23l2.1-15.8C23.7,49.4,20.3,46.1,18.5,41.8z"/>
+                    </g>
+                    <path opacity="7.000000e-02" fill="#202021" d="M34.7,10.3C21.1,10.3,10,21.3,10,35s11.1,24.8,24.8,24.8c13.7,0,24.8-11.1,24.8-24.8
+                    S48.4,10.3,34.7,10.3z M34.7,52.6c-9.7,0-17.6-7.9-17.6-17.6S25,17.4,34.7,17.4S52.3,25.3,52.3,35S44.4,52.6,34.7,52.6z"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>
+    <div id= "chartDiv">
+        <canvas id= "myChart"></canvas>
+    </div>
+    <div id="container">
+        <div class="roundedCorners" id="resultsDiv1">
+            <p id="puntuaciones1" class="puntuaciones1"></p>
+            <div class = "resContainer">
+                <div id="res1_1" class="res1"></div>
+                <div id= "res1_2" class="res2"></div>
+            </div>
+        </div>
+        <div class="roundedCorners" id="resultsDiv2">
+            <p id="puntuaciones2" class="puntuaciones1"></p>
+            <div class = "resContainer">
+                <div id="res2_1"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script>
+        validar();
+        main(1);
+        drawDummyGraph();
+    </script>
+    
+</body>
+    
+</html>
