@@ -1,6 +1,10 @@
 Parse.initialize("GND8xkckLAJGY4Lo0lFyWeLUBMJnSzW5u6i9NEiZ","fbVNV89U16Zgdkpv7iEatWwtLMGY1G7VvRNvVKWl");
 
 
+var dataColores;
+var dataEquipos;
+
+var version;
 var myBarChart;
 var index = [];
 var scoresSumados = [];
@@ -10,7 +14,7 @@ var total = 0;
 
 var allScores = [];
 for(var x = 0; x < 17; x++){
-    allScores[x] = [];   
+    allScores[x] = [];
 }
 
 for(var x=0; x<4; x++){
@@ -42,13 +46,14 @@ function createTask(taskIndexI, taskIndexJ) {
     }
 }
 
-function main(){
+function main(opcion){
+    version = opcion
     var numTasksI = 17;
     var numTasksJ = 16;
     var tasks = [];
     for (var i = 0; i < numTasksI; i++) {
         for(var j=0; j < numTasksJ; j++)
-        tasks.push(createTask(i,j));
+            tasks.push(createTask(i,j));
     }
     new TaskList(tasks, function () {
     }).doTasks();
@@ -86,38 +91,53 @@ function hacerBidimensional(array1,array2){
 }
 
 function resultados (){
-    
+    borrarLoading();
+
     //Genera el array scoresSumados que contiene los scores sumados de todos los equipos
     sumarArrayPorColumna(allScores,scoresSumados);
-    
-    drawGraph();
-    
+
+    dataEquipos = createData(scoresSumados,equipos2);
+
+    if(version==1)
+    drawGraphEquipos();
+
     //scoresSumados ahora contendra el score y el nombre del equipo, p.e. scoresSumados[i] = [score,nombreDeEquipo]
     hacerBidimensional(scoresSumados,equipos2);
-    
+
     //va a generar el array scoresPorColor, array bidimensional de 4x4. En scoresPorColor[i] contiene los scores de los 4 equipos de un mismo color
     porColor();
-    
+
     //Sumar los scores de todos los equipos (guardados en scoresPorColor) de un mismo color y guardarlo en scoresSumadosPorColor
     sumarArrayPorRenglon(scoresPorColor,scoresSumadosPorColor);
-    
+
+
+    dataColores = createData(scoresSumadosPorColor,colores);
+
+    if(version==2)
+    drawGraphColores();
+
     //scoresSumadosPorColor ahora contendra la suma de los equipos de un color y el nombre del color. [score,nombre]
     hacerBidimensional(scoresSumadosPorColor,colores);
-    
+
     //Acomodar los array que contienen las sumas de scores de mayor a menor
     scoresSumados.sort(compareNumbers);
     scoresSumadosPorColor.sort(compareNumbers);
-    
+
     //Mostrar los resultados
-    mostrarPorEquipo();
-    mostrarPorColor();
-    
+    if(version==1){
+        mostrarPorEquipo();
+        mostrarPorColor();
+    }
+    else
+        mostrarPorColor();
+
+
 }
 
 function mostrarPorEquipo(){
     resultsDiv = document.getElementById("puntuaciones1");
     resultsDiv.appendChild(document.createTextNode("Ranking por equipos"));
-    
+
     for(var i=0; i<scoresSumados.length; i++){
         var div = document.createElement("div");
         if(i<scoresSumados.length/2){
@@ -126,13 +146,13 @@ function mostrarPorEquipo(){
         else{
             resultsDiv = document.getElementById("res1_2")
         }
-        
+
         var p = document.createElement("p");
         p.appendChild(document.createTextNode("" + (i+1) + ". " + scoresSumados[i][1] + ": " + scoresSumados [i][0]));
-        
+
         if((i==0) || (i==1) || (i==2))
             p.style.fontWeight = "bolder";
-        
+
         p.style.lineHeight = "50%";
         resultsDiv.appendChild(p);
     }
@@ -141,11 +161,11 @@ function mostrarPorEquipo(){
 function mostrarPorColor(){
     resultsDiv = document.getElementById("puntuaciones2");
     resultsDiv.appendChild(document.createTextNode("Ranking por colores"));
-    
+
     for(var i=0; i<scoresSumadosPorColor.length; i++){
         var div = document.createElement("div");
         resultsDiv = document.getElementById("res2_1");
-        
+
         var p = document.createElement("p");
         p.appendChild(document.createTextNode("" + (i+1) + ". " + scoresSumadosPorColor[i][1] + ": " + scoresSumadosPorColor [i][0]));
         p.style.lineHeight = "50%";
@@ -155,7 +175,7 @@ function mostrarPorColor(){
 
 
 function compareNumbers(a, b) {
-  return b[0] - a[0];
+    return b[0] - a[0];
 }
 
 function leerCasilla(estacion,equipo,taskIndexI,taskIndexJ,callback){
@@ -176,16 +196,35 @@ function leerCasilla(estacion,equipo,taskIndexI,taskIndexJ,callback){
             }
             total++;
             if(total==272)
-                {
-                    resultados();   
-                }
+            {
+                resultados();
+            }
         }
-        ,error: function (error){
-            alert("Error: " + error.message);
+        ,error: function (){
+            errorLoading();
         }
     });
 }
 
+function errorLoading(){
+    borrarLoading();
+    myBarChart.destroy();
+    var div = document.getElementById("chartDiv");
+    div.innerHTML = "";
+    var text = document.createElement("div");
+    text.className = "errorText";
+    text.appendChild(document.createTextNode("Error de conexión. "));
+    var link = document.createElement("a");
+    link.style.color = "#0088E2";
+    link.appendChild(document.createTextNode("Intentar de nuevo"));
+    link.setAttribute("href", "javascript:history.go(0);");
+    text.appendChild(link);
+    div.appendChild(text);
+}
+
+function prueba(){
+    alert("Hoal");
+}
 
 var equipos = [
     "CITAMARILLO","CITMORADO","CITROJO","CITVERDE",
@@ -348,6 +387,12 @@ Chart.defaults.global = {
     onAnimationComplete: function(){}
 }
 
+function borrarLoading(){
+    var loaderDiv = document.getElementById("loaderContainer");
+    loaderDiv.style.background = "transparent";
+    loaderDiv.innerHTML = "";
+}
+
 //Opciones de la grafica de barras
 var barOptions=
 {
@@ -386,13 +431,32 @@ var barOptions=
 
 }
 
+
+function createData(dataToUse, labelsToUse){
+    var data = {
+        labels: labelsToUse,
+        datasets: [
+            {
+                label: "Ranking",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: dataToUse
+            }
+        ]
+    };
+    return data;
+}
+
+/*
 //La informacion de la tabla, actualmente se usa scores2 en vez de scores porque aun hay errores, scores contendra los valores reales de la base
-//Los colores de la grafica en realidad se cambian en el metodo drawGraph
-var data = {
+//Los colores de la grafica en realidad se cambian en el metodo drawGraphEquipos
+var dataEquipos = {
     labels: equipos2,
     datasets: [
         {
-            label: "My First dataset",
+            label: "Ranking por equipos",
             fillColor: "rgba(220,220,220,0.5)",
             strokeColor: "rgba(220,220,220,0.8)",
             highlightFill: "rgba(220,220,220,0.75)",
@@ -402,12 +466,28 @@ var data = {
     ]
 };
 
+var dataColores = {
+    labels: colores,
+    datasets: [
+        {
+            label: "Ranking por colores",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: scoresSumadosPorColor
+        }
+    ]
+};
+*/
+
+
 //Sirve para el despliegue inicial de informacion (antes de leer datos de la base)
-var dummyData = {
+var dummyData1 = {
     labels: equipos2,
     datasets: [
         {
-            label: "My First dataset",
+            label: "Ranking por colores",
             fillColor: "rgba(220,220,220,0.5)",
             strokeColor: "rgba(220,220,220,0.8)",
             highlightFill: "rgba(220,220,220,0.75)",
@@ -416,6 +496,20 @@ var dummyData = {
         }
     ]
 };
+
+var dummyData2 = {
+    labels: colores,
+    datasets: [
+        {
+            label: "Ranking por colores",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [.5,.5,.5,.5]
+        }
+    ]
+}
 
 function porColor(){
     for(var i=0; i<4;i++){
@@ -428,10 +522,10 @@ function porColor(){
 
 function drawDummyGraph(){
     var ctx = document.getElementById("myChart").getContext("2d");
-    myBarChart = new Chart(ctx).Bar(dummyData, {
+    var dummyOptions = {
         scaleShowGridLines: false,
         animationSteps: 1,
-        
+
         showScale: true,
 
         // Boolean - If we want to override with a hard coded scale
@@ -444,79 +538,128 @@ function drawDummyGraph(){
         scaleStepWidth: 1,
         // Number - The scale starting value
         scaleStartValue: 0
-    });
+    }
+    if(version==1)
+        myBarChart = new Chart(ctx).Bar(dummyData1, dummyOptions);
+
+    else
+        myBarChart = new Chart(ctx).Bar(dummyData2, dummyOptions);
+
     for(var i=0; i<4;i++){
         for(var j=0;j<4;j++){
             var numero = (j*4)+i;
             var color;
             var colorSeleccionado;
-            
+
             //Amarillo
             if(numero==0 || numero==4 || numero==8 || numero==12){
                 color = "#FFFF00";
                 colorSeleccionado = "#FFFF99";
             }
-            
+
             //Morado
             if(numero==1 || numero==5 || numero==9 || numero==13){
                 color = "#56077A";
                 colorSeleccionado = "#CAA2DD";
             }
-            
+
             //Rojo
             if(numero==2 || numero==6 || numero==10 || numero==14){
                 color = "#DD0000";
                 colorSeleccionado = "#F47F88";
             }
-            
+
             //Verde
             if(numero==3 || numero==7 || numero==11 || numero==15){
                 color = "#22892D";
                 colorSeleccionado = "#83E291";
             }
-            
-            myBarChart.datasets[0].bars[(j*4)+i].fillColor = color;
-            myBarChart.datasets[0].bars[(j*4)+i].highlightFill = colorSeleccionado;
+
+            if(version==1){
+                myBarChart.datasets[0].bars[(j*4)+i].fillColor = color;
+                myBarChart.datasets[0].bars[(j*4)+i].highlightFill = colorSeleccionado;
+            }
+            else{
+                myBarChart.datasets[0].bars[i].fillColor = color;
+                myBarChart.datasets[0].bars[i].highlightFill = colorSeleccionado;
+            }
         }
     }
     myBarChart.update();
 }
 
-//Hacer la grafica, asi como cambiarle los colores a cada barra
-function drawGraph(){
+function drawGraphColores(){
     var ctx = document.getElementById("myChart").getContext("2d");
     myBarChart.destroy();
-    myBarChart = new Chart(ctx).Bar(data, barOptions);
+    myBarChart = new Chart(ctx).Bar(dataColores, barOptions);
+    var color;
+    var colorSeleccionado;
+    for(var i=0; i<4; i++){
+
+        //Amarillo
+        if(i==0){
+            color = "#FFFF00";
+            colorSeleccionado = "#FFFF99";
+        }
+
+        //Morado
+        if(i==1){
+            color = "#56077A";
+            colorSeleccionado = "#CAA2DD";
+        }
+
+        //Rojo
+        if(i==2){
+            color = "#DD0000";
+            colorSeleccionado = "#F47F88";
+        }
+
+        //Verde
+        if(i==3){
+            color = "#22892D";
+            colorSeleccionado = "#83E291";
+        }
+        myBarChart.datasets[0].bars[i].fillColor = color;
+        myBarChart.datasets[0].bars[i].highlightFill = colorSeleccionado;
+    }
+    myBarChart.update();
+}
+
+//Hacer la grafica, asi como cambiarle los colores a cada barra
+function drawGraphEquipos(){
+    var ctx = document.getElementById("myChart").getContext("2d");
+    myBarChart.destroy();
+    myBarChart = new Chart(ctx).Bar(dataEquipos, barOptions);
     for(var i=0; i<4;i++){
         for(var j=0;j<4;j++){
             var numero = (j*4)+i;
             var color;
             var colorSeleccionado;
-            
+
             //Amarillo
             if(numero==0 || numero==4 || numero==8 || numero==12){
                 color = "#FFFF00";
                 colorSeleccionado = "#FFFF99";
             }
-            
+
             //Morado
             if(numero==1 || numero==5 || numero==9 || numero==13){
                 color = "#56077A";
                 colorSeleccionado = "#CAA2DD";
             }
-            
+
             //Rojo
             if(numero==2 || numero==6 || numero==10 || numero==14){
                 color = "#DD0000";
                 colorSeleccionado = "#F47F88";
             }
-            
+
             //Verde
             if(numero==3 || numero==7 || numero==11 || numero==15){
                 color = "#22892D";
                 colorSeleccionado = "#83E291";
             }
-            
+
             myBarChart.datasets[0].bars[(j*4)+i].fillColor = color;
             myBarChart.datasets[0].bars[(j*4)+i].highlightFill = colorSeleccionado;
         }
