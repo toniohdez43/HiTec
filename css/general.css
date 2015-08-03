@@ -1,3 +1,21 @@
+#logoHi{
+    position: absolute;
+    width:150%;
+    height:150%;
+    top:10%;
+}
+
+@font-face {
+    font-family: Futura;
+    src: url(../fonts/Futura/FuturaStd-CondensedLight.otf);
+}
+
+@font-face {
+    font-family: ironick;
+    src: url(../fonts/ironick-normal/IronickNF.otf);
+}
+
+
 /* Begin Navigation Bar Styling */
 #nav {
     height: 60px;
@@ -472,6 +490,8 @@
     width: 80%;
     left: 10%;
     color: #009688;
+    font-size: .9em;
+    font-weight: bold;
 }
 .drinks{
     display:list-item;
@@ -479,19 +499,72 @@
     margin-right: auto;
 
 }
-#logoHi{
+.mesa{
+    border:solid 1px #000000;
+    float: left;
     position: absolute;
-    width:150%;
-    height:150%;
-    top:10%;
 }
+#mesa1{
 
+
+    height:33%;
+    width:50%;
+    left:0%;
+    top:0%;
+
+}
+#mesa2{
+
+    height:33%;
+    width:50%;
+    left:50%;
+    color:#000;
+    top:0%;
+
+}
+#mesa3{
+
+
+    height:33%;
+    width:50%;
+    left:0%;
+    top:33.5%;
+
+}
+#mesa4{
+
+    height:33%;
+    width:50%;
+    left:50%;
+    color:#000;
+    top:33.5%;
+
+}
+#mesa5{
+
+
+    height:33%;
+    width:50%;
+    left:0%;
+    top:67%;
+
+}
+#mesa6{
+
+    height:33%;
+    width:50%;
+    left:50%;
+    color:#000;
+    top:67%;
+
+}
 body {
     margin-left: 0px;
     margin-top: 0px;
     margin-right: 0px;
     margin-bottom: 0px;
-    font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+
+    font-size: 1.5em;
 }
 
 .puntuaciones1{
@@ -583,6 +656,7 @@ body {
     margin-top:1px;
     margin-bottom:30px;
     position: relative;
+    font-size: 1.5em;
 }
 
 #Footer{
@@ -643,6 +717,7 @@ core-toolbar{
     margin-right:100px;
     margin-left:100px;
     margin-top:65px;
+    font-size: 1.5em;
 }
 #my-button2 {
     margin-left: 5%;
@@ -650,6 +725,7 @@ core-toolbar{
     display: block;
     background: lightskyblue;
     margin-top: 65px;
+    font-size: 1.5em;
 }
 
 #my-button3{
@@ -658,21 +734,25 @@ core-toolbar{
     width: 40%;
     margin-left: 5%;
     margin-top: 50%;
+    font-size: 1.5em;
 }
 
 #my-button4{
     background: lightskyblue;
     width: 40%;
+    font-size: 1.5em;
 }
 
 #button-cancel{
     display: block;
     margin: 1000px;
+    font-size: 1.5em;
 }
 
 .my-button{
     font-size: 20px;
     background:lightskyblue;
+    font-size: 1.5em;
 }
 
 #infoDiv{
@@ -680,6 +760,7 @@ core-toolbar{
     margin-left: 20%;
     font-size: 20px;
     display: block;
+    font-size: 1.5em;
 }
 
 small

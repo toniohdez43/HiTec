@@ -99,7 +99,7 @@ function resultados (){
     dataEquipos = createData(scoresSumados,equipos2);
 
     if(version==1)
-    drawGraphEquipos();
+        drawGraphEquipos();
 
     //scoresSumados ahora contendra el score y el nombre del equipo, p.e. scoresSumados[i] = [score,nombreDeEquipo]
     hacerBidimensional(scoresSumados,equipos2);
@@ -114,7 +114,7 @@ function resultados (){
     dataColores = createData(scoresSumadosPorColor,colores);
 
     if(version==2)
-    drawGraphColores();
+        drawGraphColores();
 
     //scoresSumadosPorColor ahora contendra la suma de los equipos de un color y el nombre del color. [score,nombre]
     hacerBidimensional(scoresSumadosPorColor,colores);
@@ -234,13 +234,13 @@ var equipos = [
 ];
 
 var equipos2 = [
-    "CIT-Amarillo","CIT-Morado","CIT-Rojo","CIT-Verde",
-    "Ingenieria-Amarillo","Ingenieria-Morado","Ingenieria-Rojo","Ingenieria-Verde",
-    "ENH-Amarillo","ENH-Morado","ENH-Rojo","ENH-Verde",
-    "PIT-Amarillo","PIT-Morado","PIT-Rojo","PIT-Verde"
+    "CIT-Naranja","CIT-Morado","CIT-Rojo","CIT-Verde",
+    "Ingenieria-Naranja","Ingenieria-Morado","Ingenieria-Rojo","Ingenieria-Verde",
+    "ENH-Naranja","ENH-Morado","ENH-Rojo","ENH-Verde",
+    "PIT-Naranja","PIT-Morado","PIT-Rojo","PIT-Verde"
 ];
 
-var colores = ["Amarillo", "Morado", "Rojo", "Verde"];
+var colores = ["Naranja", "Morado", "Rojo", "Verde"];
 
 //hardcoded scores solo para el uso de la grafica antes de tener funcional el array scores[]
 var scores2 = [
@@ -450,36 +450,36 @@ function createData(dataToUse, labelsToUse){
 }
 
 /*
-//La informacion de la tabla, actualmente se usa scores2 en vez de scores porque aun hay errores, scores contendra los valores reales de la base
-//Los colores de la grafica en realidad se cambian en el metodo drawGraphEquipos
-var dataEquipos = {
-    labels: equipos2,
-    datasets: [
-        {
-            label: "Ranking por equipos",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: scoresSumados
-        }
-    ]
-};
+ //La informacion de la tabla, actualmente se usa scores2 en vez de scores porque aun hay errores, scores contendra los valores reales de la base
+ //Los colores de la grafica en realidad se cambian en el metodo drawGraphEquipos
+ var dataEquipos = {
+ labels: equipos2,
+ datasets: [
+ {
+ label: "Ranking por equipos",
+ fillColor: "rgba(220,220,220,0.5)",
+ strokeColor: "rgba(220,220,220,0.8)",
+ highlightFill: "rgba(220,220,220,0.75)",
+ highlightStroke: "rgba(220,220,220,1)",
+ data: scoresSumados
+ }
+ ]
+ };
 
-var dataColores = {
-    labels: colores,
-    datasets: [
-        {
-            label: "Ranking por colores",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: scoresSumadosPorColor
-        }
-    ]
-};
-*/
+ var dataColores = {
+ labels: colores,
+ datasets: [
+ {
+ label: "Ranking por colores",
+ fillColor: "rgba(220,220,220,0.5)",
+ strokeColor: "rgba(220,220,220,0.8)",
+ highlightFill: "rgba(220,220,220,0.75)",
+ highlightStroke: "rgba(220,220,220,1)",
+ data: scoresSumadosPorColor
+ }
+ ]
+ };
+ */
 
 
 //Sirve para el despliegue inicial de informacion (antes de leer datos de la base)
@@ -551,10 +551,10 @@ function drawDummyGraph(){
             var color;
             var colorSeleccionado;
 
-            //Amarillo
+            //Naranja
             if(numero==0 || numero==4 || numero==8 || numero==12){
-                color = "#FFFF00";
-                colorSeleccionado = "#FFFF99";
+                color = "#FF7F00";
+                colorSeleccionado = "#FFB570";
             }
 
             //Morado
@@ -596,10 +596,10 @@ function drawGraphColores(){
     var colorSeleccionado;
     for(var i=0; i<4; i++){
 
-        //Amarillo
+        //Naranja
         if(i==0){
-            color = "#FFFF00";
-            colorSeleccionado = "#FFFF99";
+            color = "#FF7F00";
+            colorSeleccionado = "#FFB570";
         }
 
         //Morado
@@ -636,10 +636,10 @@ function drawGraphEquipos(){
             var color;
             var colorSeleccionado;
 
-            //Amarillo
+            //Naranja
             if(numero==0 || numero==4 || numero==8 || numero==12){
-                color = "#FFFF00";
-                colorSeleccionado = "#FFFF99";
+                color = "#FF7F00";
+                colorSeleccionado = "#FFB570";
             }
 
             //Morado

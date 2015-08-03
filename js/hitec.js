@@ -50,6 +50,7 @@ function buscarMatricula(){
                 infoDiv = document.createElement("div");
                 infoDiv.id = "infoDiv"
                 infoDiv.appendChild(document.createTextNode("No se encontro la matricula " + mat));
+                infoDiv.appendChild(document.createElement("br"));
                 var btnCancel = document.createElement("paper-button");
                 btnCancel.id = "my-button4";
                 btnCancel.setAttribute("label","OK");
@@ -228,7 +229,12 @@ function desplegarDatos(){
     btnCancel.addEventListener('click', function(){
         limpiar();
         });
-    
+    $(document).keypress(function(event){
+        if(event.keyCode == 13){
+            $("#my-button3").click();
+        }
+    });
+
     //Accion que ocurrira al presionar el boton Enviar
     btnEnviar.addEventListener('click', function(){
         registrarAlumno();
