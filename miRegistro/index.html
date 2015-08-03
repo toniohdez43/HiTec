@@ -1,8 +1,11 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head lang="en">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="../bower_components/platform/platform.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
 
     <link type="text/css" rel="stylesheet" href="../css/general.css">
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
@@ -10,7 +13,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="../jsss/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
     <script src="../js/validacion.js"></script>
 
 
@@ -25,61 +28,39 @@
     <script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.3.1.min.js"></script>
     <script src="../js/hitec.js"></script>
 
-    <title>Registro HiTec</title>
+    <title>Registro</title>
 </head>
 <body>
 
-<polymer-element name="note-list">
-    <template>
-        <style>
-            :host {
-                position:relative;
+<div class="row">
+    <br>
+</div>
 
-            }
-        </style>
-        <div id ="Container">
-            <div id="MainContainer">
-
-                <div class="contain" id="contain">
-
-                    <img id="logo" src="../images/tec2.png">
-                    <paper-input id="matri" floatingLabel   label="Matricula" inputValue="{{val1}}"></paper-input>
-
-                </div>
-
-                <paper-shadow z="5"></paper-shadow>
-                <div on-click = "{{getNombre}}" id = "buttonDiv"><paper-button id="my-button" label="Verificar" raisedButton></paper-button></div>
-            </div>
+<div class="container-fluid shadowed">
+    <div class="row">
+        <h1 class="text-center">Registro HiTec 2015</h1>
+        <img class="col-xs-4 col-xs-offset-4 img-responsive" src="../images/tec2.png">
+    </div>
 
 
-            <div id="Footer">
-
-            </div>
+    <div class="row text-center">
+        <label class="control-label">Matrícula:</label>
+        <input type="text" name="matricula" value="" id="matricula" class="form-control center-block" style="width: 30%">
+        <br>
+        <div class="text-center" id="buttonHolder">
+            <div onclick="buscarMatricula()" class="btn my-button" id="buttonSubmit">Buscar</div>
         </div>
-    </template>
+    </div>
 
-    <script src="//da189i1jfloii.cloudfront.net/js/kinvey-html5-1.3.1.min.js"></script>
+    <div id="MainContainer"></div>
 
+</div>
 
-    <script>
-        //assignTeam(351);
-    validar();
-        //var log = document.getElementById("my-button");
-    main();
-
-        //assignTeam(350);
-
-    </script>
-
-
-</polymer-element>
-<note-list></note-list>
-    <script>
-       // contadortabla();
-        //alert("hola "+i);
+<script>
+    // contadortabla();
+    //alert("hola "+i);
     //assignTeam();
+</script>
 
-    </script>
-    
 </body>
 </html>

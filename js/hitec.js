@@ -11,19 +11,93 @@ infoDiv = document.createElement("div");
 var resultsContainer;
 resultsContainer = document.createElement("div");
 
+
 function valRep()
 {
     return repetido=1;
 }
 
+
+$(function(){
+    $("#matricula").keypress(function(event){
+        if(event.keyCode == 13){
+            $("#buttonSubmit").click();
+        }
+    });
+});
+
+
+function buscarMatricula(){
+    var mat;
+    mat = document.getElementById("matricula").value;
+    document.getElementById("matricula").value = "";
+
+    //alert(mat);
+    var TestObject = Parse.Object.extend("Alumni");
+    var queryAlumni = new Parse.Query(TestObject);
+    queryAlumni.equalTo("matricula", mat);
+    removedChild = document.getElementById("buttonSubmit").parentNode.removeChild(document.getElementById("buttonSubmit"));
+    //removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonSubmit"));
+    //document.getElementById("matri").style.opacity = "0";
+    //alert(mat);
+    //si no hay resultados vaciar el area
+    queryAlumni.count({
+        success: function(number){
+            if(number==0){
+                limpiar();
+                removedChild = document.getElementById("buttonSubmit").parentNode.removeChild(document.getElementById("buttonSubmit"));
+                //document.getElementById("matri").style.opacity = "0";
+                infoDiv = document.createElement("div");
+                infoDiv.id = "infoDiv"
+                infoDiv.appendChild(document.createTextNode("No se encontro la matricula " + mat));
+                var btnCancel = document.createElement("paper-button");
+                btnCancel.id = "my-button4";
+                btnCancel.setAttribute("label","OK");
+                btnCancel.setAttribute("raisedbutton","");
+                btnCancel.addEventListener('click',function (){
+                    limpiar();
+                });
+                infoDiv.appendChild(btnCancel);
+                resultsContainer.innerHTML = "";
+                document.getElementById("MainContainer").appendChild(infoDiv);
+                $(document).keypress(function(event){
+                    if(event.keyCode == 13){
+                        $("#my-button4").click();
+                    }
+                });
+            }
+            else{
+
+            }
+        },
+        error: function(error){
+            alert("Error: " + error.message);
+        }
+    });
+    queryAlumni.find({
+        success: function (results) {
+            for (var j = 0; j < results.length; j++) {
+                objectAlumni = results[j];
+                //alert("Successfully retrieved " + results.length + " tipos.");
+                // Do something with the returned Parse.Object values
+                desplegarDatos();
+            }
+        },
+
+        error: function (error) {
+            alert("ingrese una matricula valida " + error.code + " " + " " + error.message);
+        }
+    });
+}
+
+/*
 function main ()
 {
     var mat;
 
-    Polymer('note-list', {
         getNombre: function buscarMatricula()
         {
-            mat = this.val1;
+            mat = document.getElementById("matricula");
             this.val1="";
 
             var _alumno = {
@@ -39,7 +113,7 @@ function main ()
             var TestObject = Parse.Object.extend("Alumni");
             var queryAlumni = new Parse.Query(TestObject);
             queryAlumni.equalTo("matricula", mat);
-            removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
+            removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonSubmit"));
             document.getElementById("matri").style.opacity = "0";
             //alert(mat);
             //si no hay resultados vaciar el area
@@ -47,7 +121,7 @@ function main ()
                 success: function(number){
                     if(number==0){
                         limpiar();
-                        removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonDiv"));
+                        removedChild = document.getElementById("MainContainer").removeChild(document.getElementById("buttonSubmit"));
                         document.getElementById("matri").style.opacity = "0";
                         infoDiv = document.createElement("div");
                         infoDiv.id = "infoDiv"
@@ -86,8 +160,9 @@ function main ()
                 }
             });
         }
-    });
 }
+
+*/
 
 //Metodo que se llama al encontrar un alumno en la base Alumni
 function desplegarDatos(){
@@ -171,8 +246,10 @@ function registrarAlumno(){
         //cuenta los alumnos que han asistido
         //cuenta los alumnos con la matricula del alumno, si regresa un 1, ya esta registrado, no se debe volver a registrar
         success: function(number) {
-            if(number>=1)
+            if(number>=1){
                 alumnoRepetido();
+            }
+
             else{
                 guardarAlumno();
             }
@@ -229,7 +306,7 @@ function save(local){
                 objectAsistentes.save(null, {
                     success: function (objectAsistentes) {
                         
-                        document.getElementById("matri").style.opacity = "0";
+                        //document.getElementById("matri").style.opacity = "0";
                         infoDiv = document.createElement("div");
                         infoDiv.id = "infoDiv"
                         infoDiv.appendChild(document.createTextNode("Alumno guardado exitosamente"));
@@ -239,12 +316,19 @@ function save(local){
                         infoDiv.appendChild(document.createTextNode(nombre));
                         infoDiv.appendChild(document.createElement("br"));
                         infoDiv.appendChild(document.createTextNode("Equipo: " + objectAsistentes.get("equipo")));
+                        infoDiv.appendChild(document.createElement("br"));
                         var btnCancel = document.createElement("paper-button");
                         btnCancel.id = "my-button4";
                         btnCancel.setAttribute("label","OK");
                         btnCancel.setAttribute("raisedbutton","");
+                        infoDiv.appendChild(document.createElement("br"));
                         btnCancel.addEventListener('click',function (){
                             limpiar();
+                        });
+                        $(document).keypress(function(event){
+                            if(event.keyCode == 13){
+                                $("#my-button4").click();
+                            }
                         });
                         infoDiv.appendChild(btnCancel);
                         resultsContainer.innerHTML = "";
@@ -277,8 +361,8 @@ function save(local){
 function limpiar(){
     resultsContainer.innerHTML = "";
     infoDiv.innerHTML="";
-    document.getElementById("matri").style.opacity = "1";
-    document.getElementById("MainContainer").appendChild(removedChild);
+    //document.getElementById("matri").style.opacity = "1";
+    document.getElementById("buttonHolder").appendChild(removedChild);
     //alert("entro");
 }
 
@@ -344,13 +428,13 @@ function contadortabla(){
 }*/
 
 //Metodo assignTeam, para asignar los equipos a la tabla AlumnosAsistentes
-/*
-function assignTeam()
+
+function assignTeam(cantidad)
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
     var queryAsistentes = new Parse.Query(TestObject);
     var numSuccesses = 0;
-    for(i = 1; i < 33; i++) {
+    for(i = 1; i < cantidad; i++) {
         queryAsistentes.equalTo("numero", i);
         queryAsistentes.find({
             success: function (results) {
@@ -366,31 +450,38 @@ function assignTeam()
                     var num=(object.get('numero')%16);
                     switch (num)
                     {
-                        case 0: nombreEquipo = "PIT3-AMARILLO"; break;
-                        case 1: nombreEquipo = "CIT-AZUL"; break;
+                        case 0: nombreEquipo = "ENH-AMARILLO"; break;
+                        case 1: nombreEquipo = "CIT-MORADO"; break;
                         case 2: nombreEquipo = "CIT-VERDE"; break;
                         case 3: nombreEquipo = "CIT-ROJO"; break;
                         case 4: nombreEquipo = "CIT-AMARILLO"; break;
-                        case 5: nombreEquipo = "INGE-AZUL"; break;
+                        case 5: nombreEquipo = "INGE-MORADO"; break;
                         case 6: nombreEquipo = "INGE-VERDE"; break;
                         case 7: nombreEquipo = "INGE-ROJO"; break;
                         case 8: nombreEquipo = "INGE-AMARILLO"; break;
-                        case 9: nombreEquipo = "PIT2-AZUL"; break;
-                        case 10: nombreEquipo = "PIT2-VERDE"; break;
-                        case 11: nombreEquipo = "PIT2-ROJO"; break;
-                        case 12: nombreEquipo = "PIT2-AMARILLO"; break;
-                        case 13: nombreEquipo = "PIT3-AZUL"; break;
-                        case 14: nombreEquipo = "PIT3-VERDE"; break;
-                        case 15: nombreEquipo = "PIT3-ROJO"; break;
+                        case 9: nombreEquipo = "PIT-MORADO"; break;
+                        case 10: nombreEquipo = "PIT-VERDE"; break;
+                        case 11: nombreEquipo = "PIT-ROJO"; break;
+                        case 12: nombreEquipo = "PIT-AMARILLO"; break;
+                        case 13: nombreEquipo = "ENH-MORADO"; break;
+                        case 14: nombreEquipo = "ENH-VERDE"; break;
+                        case 15: nombreEquipo = "ENH-ROJO"; break;
 
                     }
                     object.set("equipo",nombreEquipo);
+                    object.set("nombre","");
+                    object.set("paterno","");
+                    object.set("materno","");
+                    object.set("correo","");
+                    object.set("carrera","");
+                    object.set("matricula","");
+                    object.set("asistio",false);
                     object.save(null,
                                 {
                         succes:function(){
                             
                         },
-                        error: function(){
+                        error: function(error){
                             alert("Error al guardar el nombre de equipo" + error.message);
                         }
                     });
@@ -405,7 +496,7 @@ function assignTeam()
     }
 
 }
-*/
+
 
 //Metodo llenarAlumni: llena la tabla Alumni con el numero de alumnos que se le indiquen
 
@@ -442,7 +533,7 @@ function llenarAlumni(numero)
 
 
 //Metodo llenarAlumnosAsistentes: llena la tabla AlumnosAsistentes con el numero de alumnos que se le indiquen
-/*
+
 function llenarAlumnosAsistentes(numero)
 {
     var TestObject = Parse.Object.extend("AlumnosAsistentes");
@@ -462,4 +553,3 @@ function llenarAlumnosAsistentes(numero)
             });
         }
 }
-*/
