@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link type="text/css" rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="css/pruebaMenu.css">
     <script src="Chart.js/Chart.min.js"></script>
@@ -71,19 +72,10 @@
             <div id= "chartDiv">
                 <canvas id= "myChart"></canvas>
             </div>
-            <div id="container">
-                <div class="roundedCorners" id="resultsDiv1">
-                    <p id="puntuaciones1" class="puntuaciones1"></p>
-                    <div class = "resContainer">
-                        <div id="res1_1" class="res1"></div>
-                        <div id= "res1_2" class="res2"></div>
-                    </div>
-                </div>
-                <div class="roundedCorners" id="resultsDiv2">
-                    <p id="puntuaciones2" class="puntuaciones1"></p>
-                    <div class = "resContainer">
-                        <div id="res2_1"></div>
-                    </div>
+            <div class="row">
+                <div class="col-xs-7 new-results-container">
+                    <div class="text-center" id="puntuaciones12"></div>
+                    <div class="col-xs-12" id="res12_1"></div>
                 </div>
             </div>
         </div>

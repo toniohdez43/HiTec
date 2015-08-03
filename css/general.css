@@ -1,3 +1,27 @@
+
+.new-results-container{
+    background: #cce9f9;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.new-results-header{
+    overflow: hidden;
+    vertical-align: bottom;
+    margin-top: 0;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: auto;
+    background: #eef490;
+    color: #049e09;
+    font-weight: bolder;
+    padding-bottom: 15px;
+    border-bottom: 5px solid #049e09;
+}
+
+
+
 #logoHi{
     position: absolute;
     width:150%;
@@ -775,8 +799,7 @@ html, body{
 }
 
 #chartDiv{
-    width: 100%;
-    height: 80%;
+
 }
 
 #myChart

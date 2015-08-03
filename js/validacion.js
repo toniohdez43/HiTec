@@ -3,7 +3,7 @@ var claveNecesaria = true;
 
 function validar(){
     var currentPath = window.location.pathname;
-    if((currentPath=="/HiTec/") || (currentPath=="/HiTec/index.html") || (currentPath=="/HiTec/index.html#")){
+    if((currentPath=="/hitec/") || (currentPath=="/hitec/index.html") || (currentPath=="/hitec/index.html#")){
         claveNecesaria = true;
     }
     else{
@@ -27,13 +27,13 @@ function validar(){
         if(clave == claveCorrecta){
             switch (texto){
                 case "registro":
-                    link = "/HiTec/miRegistro";break;
+                    link = "/hitec/r___-_-e_-gIS-t__r-o";break;
                 case "scoresporequipo":
-                    link = "/HiTec/porEquipo.html";break;
+                    link = "/hitec/p--o_r-EquI___p-o.html";break;
                 case "androidapp":
-                    link = "/HiTec/androidApp";break;
+                    link = "/hitec/a__-n-_D-r-__--O_id--_A-pp";break;
                 case "scoresporcolor":
-                    link = "/HiTec/"
+                    link = "/hitec/"
             }
         }
         else{

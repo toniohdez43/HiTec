@@ -135,16 +135,25 @@ function resultados (){
 }
 
 function mostrarPorEquipo(){
-    resultsDiv = document.getElementById("puntuaciones1");
-    resultsDiv.appendChild(document.createTextNode("Ranking por equipos"));
+    //resultsDiv = document.getElementById("puntuaciones1");
+    //resultsDiv.appendChild(document.createTextNode("Ranking por equipos"));
+
+    resultsDiv = document.getElementById("puntuaciones11");
+    var h1 = document.createElement("h1");
+    h1.appendChild(document.createTextNode("Ranking por equipos"));
+    h1.className = "new-results-header";
+    resultsDiv.appendChild(h1);
+    resultsDiv.appendChild(document.createElement("br"));
 
     for(var i=0; i<scoresSumados.length; i++){
         var div = document.createElement("div");
         if(i<scoresSumados.length/2){
-            resultsDiv = document.getElementById("res1_1");
+            //resultsDiv = document.getElementById("res1_1");
+            resultsDiv2 = document.getElementById("res11_1");
         }
         else{
-            resultsDiv = document.getElementById("res1_2")
+            //resultsDiv = document.getElementById("res1_2");
+            resultsDiv2 = document.getElementById("res11_2");
         }
 
         var p = document.createElement("p");
@@ -153,22 +162,31 @@ function mostrarPorEquipo(){
         if((i==0) || (i==1) || (i==2))
             p.style.fontWeight = "bolder";
 
-        p.style.lineHeight = "50%";
-        resultsDiv.appendChild(p);
+        //p.style.lineHeight = "50%";
+        //resultsDiv.appendChild(p);
+        resultsDiv2.appendChild(p);
     }
 }
 
 function mostrarPorColor(){
-    resultsDiv = document.getElementById("puntuaciones2");
-    resultsDiv.appendChild(document.createTextNode("Ranking por colores"));
+    //resultsDiv = document.getElementById("puntuaciones2");
+    //resultsDiv.appendChild(document.createTextNode("Ranking por colores"));
+
+    resultsDiv = document.getElementById("puntuaciones12");
+    var h1 = document.createElement("h1");
+    h1.appendChild(document.createTextNode("Ranking por colores"))
+    h1.className = "new-results-header";
+    resultsDiv.appendChild(h1);
+    resultsDiv.appendChild(document.createElement("br"));
 
     for(var i=0; i<scoresSumadosPorColor.length; i++){
         var div = document.createElement("div");
-        resultsDiv = document.getElementById("res2_1");
+        //resultsDiv = document.getElementById("res2_1");
+        resultsDiv = document.getElementById("res12_1");
 
         var p = document.createElement("p");
         p.appendChild(document.createTextNode("" + (i+1) + ". " + scoresSumadosPorColor[i][1] + ": " + scoresSumadosPorColor [i][0]));
-        p.style.lineHeight = "50%";
+        //p.style.lineHeight = "50%";
         resultsDiv.appendChild(p);
     }
 }
@@ -227,10 +245,10 @@ function prueba(){
 }
 
 var equipos = [
-    "CITAMARILLO","CITMORADO","CITROJO","CITVERDE",
-    "EIAMARILLO","EIMORADO","EIROJO","EIVERDE",
-    "ENHAMARILLO","ENHMORADO","ENHROJO","ENHVERDE",
-    "PITAMARILLO","PITMORADO","PITROJO","PITVERDE"
+    "CITNARANJA","CITMORADO","CITROJO","CITVERDE",
+    "EINARANJA","EIMORADO","EIROJO","EIVERDE",
+    "ENHNARANJA","ENHMORADO","ENHROJO","ENHVERDE",
+    "PITNARANJA","PITMORADO","PITROJO","PITVERDE"
 ];
 
 var equipos2 = [
