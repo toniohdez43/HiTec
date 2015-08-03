@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="css/pruebaMenu.css">
     <script src="Chart.js/Chart.min.js"></script>
+    <link rel="stylesheet" href="foundation/css/foundation.css">
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
     <meta charset="UTF-8">
 
@@ -20,16 +21,20 @@
 <body>
 
 <div class="page">
+    <div class="row">
+        <div class=" small-4 medium-3 large-1 columns">
   <span class="menu_toggle">
     <p id="menuText">Menu</p>
       <img id="logoHi" src="images/Logo-Hi-Tec.png">
   </span>
+        </div>
+
     <ul class="menu_items">
         <li><a href="#"><i class="icon fa fa-signal fa-2x"></i> Scores por Equipo</a></li>
         <li><a href="#"><i class="icon fa fa-coffee fa-2x"></i> Registro</a></li>
         <li><a href="#"><i class="icon fa fa-heart fa-2x"></i> Android App</a></li>
     </ul>
-
+    </div>
     <main class="content">
 
         <div class="content_inner">
@@ -96,6 +101,11 @@
     main(2);
     drawDummyGraph();
     validar();
+</script>
+<script src="foundation/js/vendor/jquery.js"></script>
+<script src="foundation/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
 </script>
 </body>
 </html>

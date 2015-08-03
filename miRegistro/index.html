@@ -16,7 +16,7 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/validacion.js"></script>
-
+    <link rel="stylesheet" href="../foundation/css/foundation.css">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="import" href="../bower_components/font-roboto/roboto.html">
@@ -33,17 +33,20 @@
 </head>
 <body>
 <div class="page">
+    <div class="row">
+        <div class=" small-4 medium-3 large-1 columns">
   <span class="menu_toggle">
     <p id="menuText">Menu</p>
       <img id="logoHi" src="../images/Logo-Hi-Tec.png">
   </span>
+        </div>
     <ul class="menu_items">
         <li><a href="../"><i class="icon fa fa-coffee fa-2x"></i> Scores por Color</a></li>
         <li><a href="../porEquipo.html"><i class="icon fa fa-signal fa-2x"></i> Scores por Equipo</a></li>
 
         <li><a href="../androidApp/"><i class="icon fa fa-heart fa-2x"></i> Android App</a></li>
     </ul>
-
+    </div>
     <main class="content">
 
         <div class="content_inner">
@@ -95,6 +98,11 @@
     // contadortabla();
     //alert("hola "+i);
     //assignTeam();
+</script>
+<script src="foundation/js/vendor/jquery.js"></script>
+<script src="foundation/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
 </script>
 
 </body>

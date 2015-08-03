@@ -10,6 +10,7 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/validacion.js"></script>
+    <link rel="stylesheet" href="../foundation/css/foundation.css">
 
     <script src="../js/puntuaciones.js"></script>
     <script src="../js/validacion.js"></script>
@@ -20,10 +21,13 @@
 
 <body>
 <div class="page">
+    <div class="row">
+        <div class=" small-4 medium-3 large-1 columns">
   <span class="menu_toggle">
     <p id="menuText">Menu</p>
       <img id="logoHi" src="../images/Logo-Hi-Tec.png">
   </span>
+        </div>
     <ul class="menu_items">
         <li><a href="#"><i class="icon fa fa-signal fa-2x"></i> Scores por Equipo</a></li>
         <li><a href="#"><i class="icon fa fa-heart fa-2x"></i> Scores por Color</a></li>
@@ -32,7 +36,7 @@
 
 
     </ul>
-
+        </div>
     <main class="content">
 
         <div class="content_inner">
@@ -61,6 +65,11 @@
         $page.removeClass('shazam');
     });
     validar();
+</script>
+<script src="foundation/js/vendor/jquery.js"></script>
+<script src="foundation/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
 </script>
 
 </body>

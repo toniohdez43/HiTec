@@ -37,7 +37,7 @@ body {
     left: 0;
     display: block;
     cursor: pointer;
-    width: 10%;
+    width: inherit;
     height: 20%;
     background-color: #8AC007;
     border-bottom-right-radius: 100%;
