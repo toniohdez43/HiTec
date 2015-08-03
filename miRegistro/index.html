@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
 
     <link type="text/css" rel="stylesheet" href="../css/general.css">
+    <link type="text/css" rel="stylesheet" href="../css/pruebaMenu.css">
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
     <meta charset="UTF-8">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -31,7 +32,28 @@
     <title>Registro</title>
 </head>
 <body>
+<div class="page">
+  <span class="menu_toggle">
+    <p id="menuText">Menu</p>
+  </span>
+    <ul class="menu_items">
+        <li><a href="../"><i class="icon fa fa-coffee fa-2x"></i> Scores por Color</a></li>
+        <li><a href="../porEquipo.html"><i class="icon fa fa-signal fa-2x"></i> Scores por Equipo</a></li>
 
+        <li><a href="../androidApp/"><i class="icon fa fa-heart fa-2x"></i> Android App</a></li>
+    </ul>
+
+    <main class="content">
+
+        <div class="content_inner">
+            <div id="wrap">
+                <!-- Here's all it takes to make this navigation bar. -->
+                <ul id="nav">
+                    <li><img src="../images/tec2.png"></li>
+                    <li><h1>HiTec 2015</h1></li>
+
+                </ul>
+            </div>
 <div class="row">
     <br>
 </div>
@@ -55,8 +77,18 @@
     <div id="MainContainer"></div>
 
 </div>
-
+</div>
+</main>
+</div>
 <script>
+    var $page = $('.page');
+
+    $('.menu_toggle').on('click', function(){
+        $page.toggleClass('shazam');
+    });
+    $('.content').on('click', function(){
+        $page.removeClass('shazam');
+    });
     // contadortabla();
     //alert("hola "+i);
     //assignTeam();

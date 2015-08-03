@@ -27,7 +27,7 @@ function validar(){
         if(clave == claveCorrecta){
             switch (texto){
                 case "registro":
-                    link = "/HiTec/registro";break;
+                    link = "/HiTec/miRegistro";break;
                 case "scoresporequipo":
                     link = "/HiTec/porEquipo.html";break;
                 case "androidapp":
