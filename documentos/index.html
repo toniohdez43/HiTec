@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="Chart.js/Chart.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/general.css">
+    <link type="text/css" rel="stylesheet" href="../css/pruebaMenu.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="js/validacion.js"></script>
+    <link rel="stylesheet" href="../foundation/css/foundation.css">
+
+    <script src="../js/puntuaciones.js"></script>
+    <script src="../js/validacion.js"></script>
+
+    <title>Android App</title>
+</head>
+
+    <div class="page">
+        <div class="row">
+            <div class=" small-4 medium-3 large-1 columns">
+  <span class="menu_toggle">
+    <p id="menuText">Menu</p>
+      <img id="logoHi" src="../images/Logo-Hi-Tec.png">
+  </span>
+            </div>
+            <ul class="menu_items">
+                <li><a href="#"><i class="icon fa fa-signal fa-2x"></i> Scores por Equipo</a></li>
+                <li><a href="#"><i class="icon fa fa-heart fa-2x"></i> Scores por Color</a></li>
+                <li><a href="#"><i class="icon fa fa-coffee fa-2x"></i> Registro</a></li>
+                <li><a href="documentos/index.html"><i class="icon fa fa-heart fa-2x"></i>Tec Experience</a></li>
+
+
+            </ul>
+        </div>
+        <main class="content">
+
+            <div class="my_content_inner">
+                <div id="wrap">
+                    <!-- Here's all it takes to make this navigation bar. -->
+                    <ul id="nav">
+                        <li style="margin: .5%"><img src="../images/Logo%20HiTec%20Blanco.png"></li>
+                    </ul>
+                </div>
+                <div class="errorText">Información general HiTec 2015.
+                </div>
+                <object style="margin-bottom: 100px; margin-left: 0" data="info_general_hitec.pdf" type="application/pdf" width="100%" height="100%">
+
+                    <p>It appears you don't have a PDF plugin for this browser.
+                        No biggie... you can <a href="myfile.pdf">click here to
+                            download the PDF file.</a></p>
+
+                </object>
+            </div>
+        </main>
+    </div>
+
+
+<script>
+    var $page = $('.page');
+
+    $('.menu_toggle').on('click', function(){
+        $page.toggleClass('shazam');
+    });
+    $('.content').on('click', function(){
+        $page.removeClass('shazam');
+    });
+    validar();
+</script>
+<script src="foundation/js/vendor/jquery.js"></script>
+<script src="foundation/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+</script>
+
+
+<body>
+
+</body>
+</html>

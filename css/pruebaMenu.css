@@ -29,6 +29,12 @@ body {
     padding: 50px 20%;
 }
 
+.my_content_inner{
+    height: 100%;
+    overflow-y: auto;
+}
+
+
 /* basically all styling from now on */
 .menu_toggle {
     z-index: 900;
@@ -124,6 +130,9 @@ body {
 }
 .menu_items li:nth-child(3) {
     margin-left: 90px;
+}
+.menu_items li:nth-child(4) {
+    margin-left: 140px;
 }
 .menu_items a {
     display: block;
