@@ -28,6 +28,13 @@
     height:150%;
     top:10%;
 }
+#logoBlanco{
+
+    position: inherit;
+    width: inherit;
+    margin-left: 45%;
+
+}
 
 @font-face {
     font-family: Futura;
@@ -49,7 +56,7 @@
     padding: 0;
     list-style: none;
     background-color: #A861A8;
-    overflow: hidden;
+
     line-height: 10px;
 }
 
